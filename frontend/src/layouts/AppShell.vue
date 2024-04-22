@@ -1,42 +1,20 @@
-<!--
-  This example requires some changes to your config:
-  
-  ```
-  // tailwind.config.js
-  module.exports = {
-    // ...
-    plugins: [
-      // ...
-      require('@tailwindcss/forms'),
-    ],
-  }
-  ```
--->
 <template>
-  <!--
-    This example requires updating your template:
-
-    ```
-    <html class="h-full bg-gray-100">
-    <body class="h-full">
-    ```
-  -->
   <div class="min-h-full">
-    <div class="bg-indigo-600 pb-32">
+    <div class="bg-teal-600 pb-32">
       <Disclosure
         as="nav"
-        class="border-b border-indigo-300 border-opacity-25 bg-indigo-600 lg:border-none"
+        class="border-b border-teal-300 border-opacity-25 bg-teal-600 lg:border-none"
         v-slot="{ open }"
       >
         <div class="mx-auto max-w-7xl px-2 sm:px-4 lg:px-8">
           <div
-            class="relative flex h-16 items-center justify-between lg:border-b lg:border-indigo-400 lg:border-opacity-25"
+            class="relative flex h-16 items-center justify-between lg:border-b lg:border-teal-400 lg:border-opacity-25"
           >
             <div class="flex items-center px-2 lg:px-0">
               <div class="flex-shrink-0">
                 <img
                   class="block h-8 w-8"
-                  src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=300"
+                  src="https://tailwindui.com/img/logos/mark.svg?color=teal&shade=300"
                   alt="Your Company"
                 />
               </div>
@@ -48,9 +26,9 @@
                     :href="item.href"
                     :class="[
                       item.current
-                        ? 'bg-indigo-700 text-white'
-                        : 'text-white hover:bg-indigo-500 hover:bg-opacity-75',
-                      'rounded-md py-2 px-3 text-sm font-medium',
+                        ? 'bg-teal-700 text-white'
+                        : 'text-white hover:bg-teal-500 hover:bg-opacity-75',
+                      'rounded-md px-3 py-2 text-sm font-medium',
                     ]"
                     :aria-current="item.current ? 'page' : undefined"
                     >{{ item.name }}</a
@@ -69,7 +47,7 @@
                   </div>
                   <input
                     id="search"
-                    class="block w-full rounded-md border-0 bg-white py-1.5 pl-10 pr-3 text-gray-900 focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-indigo-600 sm:text-sm sm:leading-6"
+                    class="block w-full rounded-md border-0 bg-white py-1.5 pl-10 pr-3 text-gray-900 focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-teal-600 sm:text-sm sm:leading-6"
                     placeholder="Search"
                     type="search"
                     name="search"
@@ -80,7 +58,7 @@
             <div class="flex lg:hidden">
               <!-- Mobile menu button -->
               <DisclosureButton
-                class="relative inline-flex items-center justify-center rounded-md bg-indigo-600 p-2 text-indigo-200 hover:bg-indigo-500 hover:bg-opacity-75 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-indigo-600"
+                class="relative inline-flex items-center justify-center rounded-md bg-teal-600 p-2 text-teal-200 hover:bg-teal-500 hover:bg-opacity-75 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-teal-600"
               >
                 <span class="absolute -inset-0.5" />
                 <span class="sr-only">Open main menu</span>
@@ -96,7 +74,7 @@
               <div class="flex items-center">
                 <button
                   type="button"
-                  class="relative flex-shrink-0 rounded-full bg-indigo-600 p-1 text-indigo-200 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-indigo-600"
+                  class="relative flex-shrink-0 rounded-full bg-teal-600 p-1 text-teal-200 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-teal-600"
                 >
                   <span class="absolute -inset-1.5" />
                   <span class="sr-only">View notifications</span>
@@ -107,7 +85,7 @@
                 <Menu as="div" class="relative ml-3 flex-shrink-0">
                   <div>
                     <MenuButton
-                      class="relative flex rounded-full bg-indigo-600 text-sm text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-indigo-600"
+                      class="relative flex rounded-full bg-teal-600 text-sm text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-teal-600"
                     >
                       <span class="absolute -inset-1.5" />
                       <span class="sr-only">Open user menu</span>
@@ -160,15 +138,15 @@
               :href="item.href"
               :class="[
                 item.current
-                  ? 'bg-indigo-700 text-white'
-                  : 'text-white hover:bg-indigo-500 hover:bg-opacity-75',
-                'block rounded-md py-2 px-3 text-base font-medium',
+                  ? 'bg-teal-700 text-white'
+                  : 'text-white hover:bg-teal-500 hover:bg-opacity-75',
+                'block rounded-md px-3 py-2 text-base font-medium',
               ]"
               :aria-current="item.current ? 'page' : undefined"
               >{{ item.name }}</DisclosureButton
             >
           </div>
-          <div class="border-t border-indigo-700 pb-3 pt-4">
+          <div class="border-t border-teal-700 pb-3 pt-4">
             <div class="flex items-center px-5">
               <div class="flex-shrink-0">
                 <img
@@ -181,13 +159,13 @@
                 <div class="text-base font-medium text-white">
                   {{ user.name }}
                 </div>
-                <div class="text-sm font-medium text-indigo-300">
+                <div class="text-sm font-medium text-teal-300">
                   {{ user.email }}
                 </div>
               </div>
               <button
                 type="button"
-                class="relative ml-auto flex-shrink-0 rounded-full bg-indigo-600 p-1 text-indigo-200 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-indigo-600"
+                class="relative ml-auto flex-shrink-0 rounded-full bg-teal-600 p-1 text-teal-200 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-teal-600"
               >
                 <span class="absolute -inset-1.5" />
                 <span class="sr-only">View notifications</span>
@@ -200,7 +178,7 @@
                 :key="item.name"
                 as="a"
                 :href="item.href"
-                class="block rounded-md px-3 py-2 text-base font-medium text-white hover:bg-indigo-500 hover:bg-opacity-75"
+                class="block rounded-md px-3 py-2 text-base font-medium text-white hover:bg-teal-500 hover:bg-opacity-75"
                 >{{ item.name }}</DisclosureButton
               >
             </div>
@@ -219,7 +197,7 @@
     <main class="-mt-32">
       <div class="mx-auto max-w-7xl px-4 pb-12 sm:px-6 lg:px-8">
         <div class="rounded-lg bg-white px-5 py-6 shadow sm:px-6">
-          <!-- Your content -->
+          <slot name="main"></slot>
         </div>
       </div>
     </main>
@@ -235,26 +213,26 @@ import {
   MenuButton,
   MenuItem,
   MenuItems,
-} from '@headlessui/vue';
-import { MagnifyingGlassIcon } from '@heroicons/vue/20/solid';
-import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/vue/24/outline';
+} from "@headlessui/vue";
+import { MagnifyingGlassIcon } from "@heroicons/vue/20/solid";
+import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/vue/24/outline";
 
 const user = {
-  name: 'Tom Cook',
-  email: 'tom@example.com',
+  name: "Tom Cook",
+  email: "tom@example.com",
   imageUrl:
-    'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+    "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
 };
 const navigation = [
-  { name: 'Dashboard', href: '#', current: true },
-  { name: 'Team', href: '#', current: false },
-  { name: 'Projects', href: '#', current: false },
-  { name: 'Calendar', href: '#', current: false },
-  { name: 'Reports', href: '#', current: false },
+  { name: "Home", href: "/" },
+  { name: "Drawers", href: "/drawers/" },
+  { name: "Review", href: "/review" },
+  { name: "Cards", href: "/cards/" },
+  { name: "Reports", href: "/reports/" },
 ];
 const userNavigation = [
-  { name: 'Your Profile', href: '#' },
-  { name: 'Settings', href: '#' },
-  { name: 'Sign out', href: '#' },
+  { name: "Your Profile", href: "/profile/" },
+  { name: "Settings", href: "/settings/" },
+  { name: "Sign out", href: "/signout" },
 ];
 </script>
