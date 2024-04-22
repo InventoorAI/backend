@@ -16,12 +16,15 @@
     "paths": {
       "@/*": ["src/*"]
     },
+    "jsx": "preserve",
+    "jsxImportSource": "vue",
 
     "allowSyntheticDefaultImports": true,
     "plugins": [{ "name": "@vue/typescript-plugin" }]
   },
-  "include": ["src"],
+  "include": ["src"]
+,
   "references": [
-    { "path": "./../tsconfig.build.json" }
+    { "path": "./tsconfig.node.json" }
   ]
 }

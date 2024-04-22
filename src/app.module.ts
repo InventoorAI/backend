@@ -11,7 +11,7 @@ import { join } from 'path'; // New
 @Module({
   imports: [MongooseModule.forRoot(process.env.MONGODB_URL), FlashcardsModule,
   ServeStaticModule.forRoot({ // New
-    rootPath: join(__dirname, '..', 'client/dist'), // New
+    rootPath: '/app/frontend/dist', // New
   }), // New
   ],
   controllers: [AppController],
