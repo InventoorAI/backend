@@ -1,26 +1,4 @@
-<!--
-  This example requires some changes to your config:
-  
-  ```
-  // tailwind.config.js
-  module.exports = {
-    // ...
-    plugins: [
-      // ...
-      require('@tailwindcss/forms'),
-    ],
-  }
-  ```
--->
 <template>
-  <!--
-    This example requires updating your template:
-
-    ```
-    <html class="h-full bg-white">
-    <body class="h-full">
-    ```
-  -->
   <div>
     <TransitionRoot as="template" :show="sidebarOpen">
       <Dialog
@@ -92,7 +70,7 @@
                           <a
                             :href="item.href"
                             :class="[
-                              item.current
+                              currentRoute.fullPath == item.href
                                 ? 'bg-gray-800 text-white'
                                 : 'text-gray-400 hover:text-white hover:bg-gray-800',
                               'group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold',
@@ -119,7 +97,7 @@
                           <a
                             :href="team.href"
                             :class="[
-                              team.current
+                              currentRoute.fullPath == team.href
                                 ? 'bg-gray-800 text-white'
                                 : 'text-gray-400 hover:text-white hover:bg-gray-800',
                               'group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold',
@@ -178,7 +156,7 @@
                   <RouterLink
                     :to="item.href"
                     :class="[
-                      item.current
+                      currentRoute.fullPath == item.href
                         ? 'bg-gray-800 text-white'
                         : 'text-gray-400 hover:text-white hover:bg-gray-800',
                       'group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold',
@@ -203,7 +181,7 @@
                   <RouterLink
                     :to="team.href"
                     :class="[
-                      team.current
+                      currentRoute.fullPath == team.href
                         ? 'bg-gray-800 text-white'
                         : 'text-gray-400 hover:text-white hover:bg-gray-800',
                       'group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold',
@@ -365,20 +343,20 @@ import {
   XMarkIcon,
 } from '@heroicons/vue/24/outline';
 import { ChevronDownIcon, MagnifyingGlassIcon } from '@heroicons/vue/20/solid';
-import { RouterLink } from 'vue-router';
+import { RouterLink, useRoute } from 'vue-router';
 
 const navigation = [
-  { name: 'Home', href: '/', icon: HomeIcon, current: true },
-  { name: 'Drawers', href: '/drawers', icon: UsersIcon, current: false },
-  { name: 'Decks', href: '/decks', icon: FolderIcon, current: false },
-  { name: 'Cards', href: '/cards', icon: CalendarIcon, current: false },
+  { name: 'Home', href: '/', icon: HomeIcon },
+  { name: 'Drawers', href: '/drawers', icon: UsersIcon },
+  { name: 'Decks', href: '/decks', icon: FolderIcon },
+  { name: 'Cards', href: '/cards', icon: CalendarIcon },
   {
     name: 'Review',
     href: '/review',
     icon: DocumentDuplicateIcon,
     current: false,
   },
-  { name: 'Reports', href: '/reports', icon: ChartPieIcon, current: false },
+  { name: 'Reports', href: '/reports', icon: ChartPieIcon },
 ];
 const decks = [
   {
@@ -396,4 +374,5 @@ const userNavigation = [
 ];
 
 const sidebarOpen = ref(false);
+const currentRoute = useRoute();
 </script>
