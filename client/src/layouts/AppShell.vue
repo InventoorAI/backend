@@ -80,7 +80,7 @@
                 <div class="flex h-16 shrink-0 items-center">
                   <img
                     class="h-8 w-auto"
-                    src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
+                    src="/src/assets/Logo.svg"
                     alt="Your Company"
                   />
                 </div>
@@ -112,10 +112,10 @@
                       <div
                         class="text-xs font-semibold leading-6 text-gray-400"
                       >
-                        Your teams
+                        Your decks
                       </div>
                       <ul role="list" class="-mx-2 mt-2 space-y-1">
-                        <li v-for="team in teams" :key="team.name">
+                        <li v-for="team in decks" :key="team.name">
                           <a
                             :href="team.href"
                             :class="[
@@ -166,7 +166,7 @@
         <div class="flex h-16 shrink-0 items-center">
           <img
             class="h-8 w-auto"
-            src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
+            src="/src/assets/Logo.svg"
             alt="Your Company"
           />
         </div>
@@ -175,8 +175,8 @@
             <li>
               <ul role="list" class="-mx-2 space-y-1">
                 <li v-for="item in navigation" :key="item.name">
-                  <a
-                    :href="item.href"
+                  <RouterLink
+                    :to="item.href"
                     :class="[
                       item.current
                         ? 'bg-gray-800 text-white'
@@ -190,18 +190,18 @@
                       aria-hidden="true"
                     />
                     {{ item.name }}
-                  </a>
+                  </RouterLink>
                 </li>
               </ul>
             </li>
             <li>
               <div class="text-xs font-semibold leading-6 text-gray-400">
-                Your teams
+                Your decks
               </div>
               <ul role="list" class="-mx-2 mt-2 space-y-1">
-                <li v-for="team in teams" :key="team.name">
-                  <a
-                    :href="team.href"
+                <li v-for="team in decks" :key="team.name">
+                  <RouterLink
+                    :to="team.href"
                     :class="[
                       team.current
                         ? 'bg-gray-800 text-white'
@@ -214,7 +214,7 @@
                       >{{ team.initial }}</span
                     >
                     <span class="truncate">{{ team.name }}</span>
-                  </a>
+                  </RouterLink>
                 </li>
               </ul>
             </li>
@@ -365,19 +365,30 @@ import {
   XMarkIcon,
 } from '@heroicons/vue/24/outline';
 import { ChevronDownIcon, MagnifyingGlassIcon } from '@heroicons/vue/20/solid';
+import { RouterLink } from 'vue-router';
 
 const navigation = [
-  { name: 'Dashboard', href: '#', icon: HomeIcon, current: true },
-  { name: 'Team', href: '#', icon: UsersIcon, current: false },
-  { name: 'Projects', href: '#', icon: FolderIcon, current: false },
-  { name: 'Calendar', href: '#', icon: CalendarIcon, current: false },
-  { name: 'Documents', href: '#', icon: DocumentDuplicateIcon, current: false },
-  { name: 'Reports', href: '#', icon: ChartPieIcon, current: false },
+  { name: 'Home', href: '/', icon: HomeIcon, current: true },
+  { name: 'Drawers', href: '/drawers', icon: UsersIcon, current: false },
+  { name: 'Decks', href: '/decks', icon: FolderIcon, current: false },
+  { name: 'Cards', href: '/cards', icon: CalendarIcon, current: false },
+  {
+    name: 'Review',
+    href: '/review',
+    icon: DocumentDuplicateIcon,
+    current: false,
+  },
+  { name: 'Reports', href: '/reports', icon: ChartPieIcon, current: false },
 ];
-const teams = [
-  { id: 1, name: 'Heroicons', href: '#', initial: 'H', current: false },
-  { id: 2, name: 'Tailwind Labs', href: '#', initial: 'T', current: false },
-  { id: 3, name: 'Workcation', href: '#', initial: 'W', current: false },
+const decks = [
+  {
+    id: 1,
+    name: 'Computational Methods',
+    href: '/decks/1',
+    initial: 'H',
+    toReview: 3,
+    total: 10,
+  },
 ];
 const userNavigation = [
   { name: 'Your profile', href: '#' },
