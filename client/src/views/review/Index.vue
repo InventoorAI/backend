@@ -1,66 +1,74 @@
 <template>
   <div class="mx-auto max-w-7xl sm:px-6 lg:px-8 mt-8">
-    <div class="relative">
-      <button
-        type="button"
-        class="border border-slate-400 rounded-md text-slate-400 absolute -left-10"
-      >
-        <XMarkIcon class="h-5 w-5" />
+    <!-- Status Bar -->
+    {{}}
+    <div class="flex gap-4 items-center">
+      <button>
+        <XMarkIcon class="h-6 w-6 text-slate-400" />
       </button>
 
-      <ProgressBar :value="40" />
-    </div>
-    <div>
-      <div class="flex gap-2 mt-4">
-        <LightBulbIcon
-          class="h-6 w-6 text-white bg-green-500 rounded-full p-1"
-        />
-        <span class="font-bold text-green-300">New Word</span>
+      <button>
+        <Cog6ToothIcon class="h-6 w-6 text-slate-400" />
+      </button>
+
+      <ProgressBar :value="40" class="w-full" />
+
+      <div class="flex gap-2">
+        <HeartIcon class="h-6 w-6 text-red-500" />
+        <span class="text-red-500 font-semibold">0</span>
       </div>
-      <p class="text-slate-400 mt-1 font-bold text-4xl">
-        Which is the right answer to the following differentiation?
-      </p>
     </div>
-    <ul class="flex gap-4 mt-2">
-      <li v-for="option in options">
-        <button
-          @click="currentOption = option.id"
-          class="bg-white/10 rounded-md p-4 mt-4 border hover:bg-white/30 transition"
-          :class="[
-            option.id == currentOption
-              ? 'border-green-400 text-green-400'
-              : 'border-slate-300 text-slate-400',
-          ]"
-        >
-          {{ option.text }}
-        </button>
-      </li>
-    </ul>
+    <!-- Flashcard Continer-->
+    <MultipleChoiceCard
+      v-if="flashcard.type == 'Multiple Choice'"
+      :flashcard="flashcard"
+    />
+
+    <EssayCard v-else-if="flashcard.type == 'Essay'" :flashcard="flashcard" />
   </div>
 </template>
 <script setup lang="ts">
-import { LightBulbIcon, XMarkIcon } from '@heroicons/vue/24/solid';
+import { HeartIcon, Cog6ToothIcon, XMarkIcon } from '@heroicons/vue/24/solid';
 import ProgressBar from 'primevue/progressbar';
-import { ref } from 'vue';
-interface Props {}
-const props = defineProps<Props>();
-const options = [
-  {
-    id: 1,
-    text: 'Option 1',
-  },
-  {
-    id: 2,
-    text: 'Option 2',
-  },
-  {
-    id: 3,
-    text: 'Option 3',
-  },
-  {
-    id: 4,
-    text: 'Option 4',
-  },
-];
-const currentOption = ref(1);
+import MultipleChoiceCard from './partials/MultipleChoiceCard.vue';
+import EssayCard from './partials/EssayCard.vue';
+const flashcard: App.Models.Flashcard = {
+  number: 1,
+  question: 'What is the capital of France?',
+  tags: [{ name: 'Trivia', color: 'bg-blue-500' }],
+  decks: [
+    {
+      name: 'Geography',
+      drawers: [],
+      flashcards: [],
+      description: 'Geography Flashcards',
+    },
+  ],
+  type: 'Essay',
+  level: 'Easy',
+  callout: 'New Card',
+
+  options: [
+    {
+      value: 'Paris',
+      isCorrect: true,
+      imgPath: 'https://source.unsplash.com/random/900x700/?paris',
+    },
+    {
+      value: 'London',
+      isCorrect: false,
+      imgPath: 'https://source.unsplash.com/random/900x700/?london',
+    },
+    {
+      value: 'Berlin',
+      isCorrect: false,
+      imgPath: 'https://source.unsplash.com/random/900x700/?berlin',
+    },
+    {
+      value: 'Madrid',
+      isCorrect: false,
+      imgPath: 'https://source.unsplash.com/random/900x700/?madrid',
+    },
+  ],
+};
 </script>
