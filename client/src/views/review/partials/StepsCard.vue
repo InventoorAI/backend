@@ -9,7 +9,7 @@
         <span class="mt-2 text-slate-400 text-xl w-10"> [{{ idx }}] </span>
 
         <LatexInput
-          v-model="steps[0]"
+          v-model="steps[idx]"
           class="w-full"
           placeholder="Enter a step"
         />

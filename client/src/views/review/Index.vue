@@ -1,5 +1,5 @@
 <template>
-  <div class="mx-auto max-w-7xl sm:px-6 lg:px-8 mt-8">
+  <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
     <!-- Status Bar -->
     <div class="flex gap-4 items-center -ml-3">
       <button>
@@ -10,7 +10,7 @@
         <Cog6ToothIcon class="h-6 w-6 text-slate-400" />
       </button>
 
-      <ProgressBar :value="progress" class="w-full" />
+      <ReviewProgressBar :modelValue="progress" :total="total" class="w-full" />
 
       <div class="flex gap-2">
         <HeartIcon class="h-6 w-6 text-red-500" />
@@ -37,6 +37,7 @@
   </div>
 </template>
 <script setup lang="ts">
+import ReviewProgressBar from './partials/ReviewProgressBar.vue';
 import { HeartIcon, Cog6ToothIcon, XMarkIcon } from '@heroicons/vue/24/solid';
 import ProgressBar from 'primevue/progressbar';
 import MultipleChoiceCard from './partials/MultipleChoiceCard.vue';
@@ -50,4 +51,5 @@ const currentFlashcard = computed(
 );
 const progress = ref(0);
 const lives = ref(3);
+const total = ref(10);
 </script>

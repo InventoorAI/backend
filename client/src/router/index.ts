@@ -9,13 +9,6 @@ import ReportsIndexView from '@/views/reports/Index.vue'
 
 const routes = [
   {
-    path: '/',
-    component: HomeView,
-    meta: {
-      title: 'Home',
-    },
-  },
-  {
     path: '/drawers',
     component: DrawerIndexView,
     meta: {
@@ -30,25 +23,11 @@ const routes = [
     },
   },
   {
-    path: '/cards',
-    component: CardIndexView,
-    meta: {
-      title: 'Cards',
-    },
-  },
-  {
     path: '/review',
     component: ReviewView,
     meta: {
       title: 'Review',
       hideLayout: true,
-    },
-  },
-  {
-    path: '/reports',
-    component: ReportsIndexView,
-    meta: {
-      title: 'Reports',
     },
   },
 ]

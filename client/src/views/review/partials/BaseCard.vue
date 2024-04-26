@@ -21,12 +21,7 @@
       >
         <p class="text-slate-400 font-bold text-4xl">
           <span class="text-green-400"> Q{{ flashcard.number }}:</span>
-          <span
-            v-katex="{
-              expression: flashcard.question,
-              options: { throwOnError: false },
-            }"
-          >
+          <span class="ml-1">
             {{ flashcard.question }}
           </span>
         </p>

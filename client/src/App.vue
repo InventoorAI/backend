@@ -8,12 +8,10 @@ const currentRoute = useRoute();
 
 <template>
   <div>
-    <AppShell v-if="!currentRoute.meta.hideLayout">
+    <AppShell>
       <template #main>
-        {{ !currentRoute.meta.hideLayout }}
         <RouterView />
       </template>
     </AppShell>
-    <RouterView v-else />
   </div>
 </template>

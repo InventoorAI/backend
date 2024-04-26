@@ -17,7 +17,8 @@
     "katex": "^0.16.10",
     "primevue": "^3.51.0",
     "vue": "^3.4.21",
-    "vue-router": "^4.3.2"
+    "vue-router": "^4.3.2",
+    "vue3-avataaars": "^1.0.15"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^5.0.4",
