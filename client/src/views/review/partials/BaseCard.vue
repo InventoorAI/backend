@@ -1,6 +1,6 @@
 <template>
   <div
-    class="overflow-hidden rounded-lg bg-white dark:bg-slate-800/80 border border-slate-600 shadow m-20 my-10 p-4 p-10 pb-20"
+    class="overflow-hidden rounded-lg bg-white dark:bg-slate-800/80 border border-slate-600 shadow m-20 my-10 p-4 p-10 pb-20 px-6"
   >
     <div>
       <div class="flex gap-2 items-center mt-4">
@@ -21,7 +21,14 @@
       >
         <p class="text-slate-400 font-bold text-4xl">
           <span class="text-green-400"> Q{{ flashcard.number }}:</span>
-          {{ flashcard.question }}
+          <span
+            v-katex="{
+              expression: flashcard.question,
+              options: { throwOnError: false },
+            }"
+          >
+            {{ flashcard.question }}
+          </span>
         </p>
       </div>
     </div>

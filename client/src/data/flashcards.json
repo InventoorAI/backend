@@ -1,0 +1,57 @@
+[
+  {
+  "number": 1,
+  "question": "What is the capital of France?",
+  "tags": [{ "name": "Trivia", "color": "purple" }],
+  "decks": [
+  ],
+  "type": "Multiple Choice",
+  "level": "Easy",
+  "callout": "New Card",
+
+  "options": [
+    {
+      "value": "Paris",
+      "isCorrect": true,
+      "imgPath": "https://source.unsplash.com/random/900x700/?paris"
+    },
+    {
+      "value": "London",
+      "isCorrect": false,
+      "imgPath": "https://source.unsplash.com/random/900x700/?london"
+    },
+    {
+      "value": "Berlin",
+      "isCorrect": false,
+      "imgPath": "https://source.unsplash.com/random/900x700/?berlin"
+    },
+    {
+      "value": "Madrid",
+      "isCorrect": false,
+      "imgPath": "https://source.unsplash.com/random/900x700/?madrid"
+    }
+  ]
+  },
+
+  {
+  "number": 2,
+  "question": "Calculate int{x^2}",
+  "tags": [{ "name": "Mathematics", "color": "green" }],
+  "decks": [
+  ],
+  "type": "Steps",
+  "level": "Easy",
+  "callout": "New Card"
+  },
+
+  {
+  "number": 3,
+  "question": "What is the quadratic formula",
+  "tags": [{ "name": "Mathematics", "color": "green" }],
+  "decks": [
+  ],
+  "type": "Multiple Choice",
+  "level": "Easy",
+  "callout": "New Card"
+  }
+]

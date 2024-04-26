@@ -7,7 +7,6 @@
 import BaseCard from '@/views/review/partials/BaseCard.vue';
 interface Props {
   flashcard: App.Models.Flashcard;
-  answer: string;
 }
 defineProps<Props>();
 const answer = ref('');
