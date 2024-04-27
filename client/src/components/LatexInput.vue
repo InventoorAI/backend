@@ -1,18 +1,19 @@
 <template>
-  <div class="group flex gap-2" ref="myHoverableElement">
-    <span
-      v-if="!isHovered"
-      v-katex="{
-        expression: value,
-        options: { throwOnError: false },
-      }"
-      class="text-sm left-0 top-0 left-0 border border-slate-600 rounded-md p-2 px-3 pt-3 bg-slate-900 hover:border-green-400 w-full pb-2 pl-4 pt-[12.5px] text-green-300"
-    />
-    <InputText v-model="value" class="w-full pl-4" v-else />
-  </div>
+  <label class="relative h-full">
+    <!-- TODO: Add Support For Multiple Delimiters and Formats -->
+    <!-- TODO: Inline formatting as you complete a math block -->
+    <div
+      v-katex:auto="{ options }"
+      class="absolute z-10 left-0 h-full flex items-center ml-4 pt-0.5 pl-0.5"
+      v-if="value.length > 1"
+    >
+      ${{ value }}$
+    </div>
+    <InputText v-model="value" class="w-full pl-4 h-full" />
+  </label>
 </template>
 <script setup lang="ts">
-import { useElementHover, useVModel } from '@vueuse/core';
+import { useVModel } from '@vueuse/core';
 import InputText from 'primevue/inputtext';
 
 interface Props {
@@ -24,8 +25,11 @@ interface Emits {
 const props = defineProps<Props>();
 const emits = defineEmits<Emits>();
 const value = useVModel(props, 'modelValue', emits);
-
-import { ref } from 'vue';
-const myHoverableElement = ref<HTMLDivElement | null>(null);
-const isHovered = useElementHover(myHoverableElement);
+const options = {
+  throwOnError: false,
+  delimiters: [
+    { left: '$$', right: '$$', display: true },
+    { left: '$', right: '$', display: false },
+  ],
+};
 </script>

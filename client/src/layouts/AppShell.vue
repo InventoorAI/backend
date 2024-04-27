@@ -54,10 +54,13 @@
               <div
                 class="hidden md:ml-4 md:flex md:flex-shrink-0 md:items-center gap-2"
               >
+                <!-- TODO: Add Locale Change Functionality-->
                 <IconButton class="px-1.5 text-sm"> en </IconButton>
+                <!-- TODO: Add Theme Change Functionality -->
                 <IconButton>
                   <Eclipse class="h-5 w-5" aria-hidden="true" />
                 </IconButton>
+                <!-- TODO: Show Notifications Panel  -->
                 <IconButton
                   ><Bell class="h-5 w-5" aria-hidden="true"
                 /></IconButton>
@@ -89,7 +92,7 @@
           <div class="border-t border-gray-700 pb-3 pt-4">
             <div class="flex items-center px-5 sm:px-6">
               <div class="flex-shrink-0">
-                <Avatar v-bind="avatarProps" class="w-10 h-10" />
+                <Avatar />
               </div>
               <div class="ml-3">
                 <div class="text-base font-medium text-white">
@@ -135,7 +138,7 @@
 <script setup lang="ts">
 import Calendar from '@/components/Calendar.vue';
 import { useRoute } from 'vue-router';
-
+import Avatar from '@/components/Avatar.vue';
 import {
   Disclosure,
   DisclosureButton,

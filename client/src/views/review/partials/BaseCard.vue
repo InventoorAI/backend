@@ -22,7 +22,7 @@
         >
           <p class="text-slate-400 font-bold text-4xl">
             <span class="text-green-400"> Q{{ flashcard.number }}:</span>
-            <span class="ml-1">
+            <span v-katex:auto="{ options }" class="w-fit pl-1.5">
               {{ flashcard.question }}
             </span>
           </p>
@@ -38,6 +38,13 @@
 import Badge from '@/components/Badge.vue';
 import Card from '@/components/Card.vue';
 import { SparklesIcon } from '@heroicons/vue/24/solid';
+const options = {
+  throwOnError: false,
+  delimiters: [
+    { left: '$$', right: '$$', display: true },
+    { left: '$', right: '$', display: false },
+  ],
+};
 interface Props {
   flashcard: App.Models.Flashcard;
 }

@@ -43,7 +43,7 @@
 </template>
 <script setup lang="ts">
 interface Props {
-  variant: 'red' | 'yellow' | 'green' | 'blue' | 'indigo' | 'purple' | 'pink';
+  variant?: 'red' | 'yellow' | 'green' | 'blue' | 'indigo' | 'purple' | 'pink';
 }
 withDefaults(defineProps<Props>(), {
   variant: 'blue',

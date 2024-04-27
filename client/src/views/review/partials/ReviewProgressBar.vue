@@ -1,11 +1,13 @@
 <template>
-  <div class="rounded-md bg-slate-600/50 h-6">
-    <div
-      class="h-full bg-green-400/80 rounded-md text-left"
-      :style="{
-        width: `${percentage}%`,
-      }"
-    ></div>
+  <div class="bg-green-400 pl-2 rounded-lg border-y border-r border-green-400">
+    <div class="rounded-md bg-slate-800 h-6">
+      <div
+        class="h-full bg-green-400/40 rounded-md text-left"
+        :style="{
+          width: `${10}%`,
+        }"
+      ></div>
+    </div>
   </div>
 </template>
 <script setup lang="ts">

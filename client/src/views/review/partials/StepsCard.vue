@@ -7,7 +7,13 @@
         :key="idx"
         class="flex items-center gap-2 justify-between w-full space-y-3"
       >
-        <span class="mt-2 text-slate-400 text-xl w-10"> [{{ idx }}] </span>
+        <span class="mt-2 text-slate-400 text-xl w-10 text-center">
+          [
+          <span class="text-green-400">
+            {{ idx + 1 }}
+          </span>
+          ]:
+        </span>
 
         <LatexInput
           v-model="steps[idx]"
