@@ -1,6 +1,9 @@
 <template>
   <BaseCard :flashcard="flashcard">
-    <LongAnswerInput v-model="answer" />
+    <template #right> Test </template>
+    <template #default>
+      <LongAnswerInput v-model="answer" />
+    </template>
   </BaseCard>
 </template>
 <script setup lang="ts">

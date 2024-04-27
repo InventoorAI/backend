@@ -1,5 +1,6 @@
 <template>
   <BaseCard :flashcard="flashcard">
+    <template #right> Marks </template>
     <ul>
       <li
         v-for="(step, idx) in steps"
