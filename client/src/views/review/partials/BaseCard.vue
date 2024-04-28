@@ -1,7 +1,7 @@
 <template>
   <Card class="pl-3">
     <div
-      class="overflow-hidden rounded-lg bg-white p-4 pt-10 pb-20 px-9 dark:bg-green-400/10"
+      class="overflow-hidden rounded-lg bg-white p-4 pt-10 pb-14 px-9 dark:bg-slate-800"
     >
       <div>
         <div class="flex gap-2 items-center mt-4">

@@ -47,6 +47,27 @@
                 >
                   <component :is="item.icon" />
                 </RouterLink>
+
+                <!-- TODO: Button tracks current review state, starts a new one if -->
+                <!-- none is ongoing, and navigates to the review page if one is -->
+                <!-- ongoing -->
+                <Button
+                  key="review"
+                  variant="hole"
+                  :class="[
+                    currentRoute.fullPath === '/review'
+                      ? 'bg-gray-900 text-white'
+                      : 'text-gray-300 hover:bg-slate-800 hover:text-white',
+                  ]"
+                  :aria-current="
+                    currentRoute.fullPath == '/review/' ? 'page' : undefined
+                  "
+                >
+                  <div class="flex items-center gap-2">
+                    <Target class="h-6 w-6" aria-hidden="true" />
+                    <Button @click="start"> Start </Button>
+                  </div>
+                </Button>
               </div>
             </div>
             <div class="flex items-center">
@@ -136,18 +157,9 @@
 </template>
 
 <script setup lang="ts">
-import Calendar from '@/components/Calendar.vue';
 import { useRoute } from 'vue-router';
 import Avatar from '@/components/Avatar.vue';
-import {
-  Disclosure,
-  DisclosureButton,
-  DisclosurePanel,
-  Menu,
-  MenuButton,
-  MenuItem,
-  MenuItems,
-} from '@headlessui/vue';
+import { Disclosure, DisclosureButton, DisclosurePanel } from '@headlessui/vue';
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/vue/24/outline';
 import {
   PanelBottom,
@@ -159,6 +171,8 @@ import {
 import { ref } from 'vue';
 import IconButton from '@/components/IconButton.vue';
 import AvatarDropDown from './AvatarDropDown.vue';
+import Button from '@/components/Button.vue';
+import { useReview } from '@/stores/review';
 
 const open = ref(true);
 const currentRoute = useRoute();
@@ -166,11 +180,11 @@ const currentRoute = useRoute();
 const navigation = [
   { name: 'Drawers', href: '/drawers', icon: PanelBottom },
   { name: 'Decks', href: '/decks', icon: WalletCards },
-  { name: 'Review', href: '/review', icon: Target },
 ];
 const userNavigation = [
   { name: 'Your Profile', href: '#' },
   { name: 'Settings', href: '#' },
   { name: 'Sign out', href: '#' },
 ];
+const { start } = useReview();
 </script>

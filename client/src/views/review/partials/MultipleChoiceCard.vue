@@ -1,4 +1,5 @@
 <template>
+  <!-- TODO: Proper CSS classes when a card is disabled -->
   <BaseCard :flashcard="flashcard">
     <ul
       class="grid grid-cols-4 gap-6 mt-4"
@@ -6,7 +7,11 @@
     >
       <li v-for="(option, idx) in flashcard.options">
         <button
-          @click="currentOption = option.value"
+          :disabled="disabled"
+          @click="
+            currentOption = option.value;
+            emits('answer', option.isCorrect, option.value);
+          "
           class="rounded-lg p-4 mt-4 border-2 hover:bg-white/10 hover:text-slate-400 transition w-full group text-lg flex flex-col items-center justify-between border gap-4 h-full min-h-[300px]"
           :class="[
             option.value == currentOption && option.isCorrect
@@ -54,7 +59,14 @@ import { XCircleIcon, CheckCircleIcon } from '@heroicons/vue/24/solid';
 import { ref } from 'vue';
 interface Props {
   flashcard: App.Models.Flashcard;
+  disabled: boolean;
 }
-defineProps<Props>();
+interface Emits {
+  (e: 'answer', correct: boolean, option: string): void;
+}
+const emits = defineEmits<Emits>();
+withDefaults(defineProps<Props>(), {
+  disabled: false,
+});
 const currentOption = ref('');
 </script>

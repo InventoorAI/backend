@@ -2,7 +2,7 @@
   <div class="bg-green-400 pl-2 rounded-lg border-y border-r border-green-400">
     <div class="rounded-md bg-slate-800 h-6">
       <div
-        class="h-full bg-green-400/40 rounded-md text-left"
+        class="h-full bg-green-500/70 rounded-md text-left"
         :style="{
           width: `${10}%`,
         }"
