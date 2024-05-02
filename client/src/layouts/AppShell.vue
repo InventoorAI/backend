@@ -26,11 +26,7 @@
                 </DisclosureButton>
               </div>
               <div class="flex flex-shrink-0 items-center">
-                <img
-                  class="h-8 w-auto"
-                  src="https://tailwindui.com/img/logos/mark.svg?color=green&shade=500"
-                  alt="Your Company"
-                />
+                <Logo class="w-8 text-green-300/90" />
               </div>
               <div class="hidden md:ml-6 md:flex md:items-center md:space-x-4">
                 <RouterLink
@@ -51,23 +47,35 @@
                 <!-- TODO: Button tracks current review state, starts a new one if -->
                 <!-- none is ongoing, and navigates to the review page if one is -->
                 <!-- ongoing -->
-                <Button
+                <RouterLink
+                  to="/review"
                   key="review"
                   variant="hole"
-                  :class="[
-                    currentRoute.fullPath === '/review'
-                      ? 'bg-gray-900 text-white'
-                      : 'text-gray-300 hover:bg-slate-800 hover:text-white',
-                  ]"
+                  :class="{
+                    'bg-gray-900 text-white h-13':
+                      currentRoute.fullPath === '/review',
+                    'text-gray-300 hover:bg-slate-800 hover:text-white h-10':
+                      currentRoute.fullPath !== '/review',
+                    'w-28 h-12': currentRoute.fullPath == '/review' && !!review,
+                  }"
+                  class="rounded-lg transition flex items-center justify-center h-10 w-10"
                   :aria-current="
                     currentRoute.fullPath == '/review/' ? 'page' : undefined
                   "
                 >
                   <div class="flex items-center gap-2">
                     <Target class="h-6 w-6" aria-hidden="true" />
-                    <Button @click="start"> Start </Button>
+                    <Button
+                      @click="start"
+                      :class="{
+                        'w-13': currentRoute.fullPath == '/review',
+                      }"
+                      v-if="currentRoute.fullPath == '/review' && !!review"
+                    >
+                      Review
+                    </Button>
                   </div>
-                </Button>
+                </RouterLink>
               </div>
             </div>
             <div class="flex items-center">
@@ -157,10 +165,12 @@
 </template>
 
 <script setup lang="ts">
-import { useRoute } from 'vue-router';
+import { RouterLink, useRoute } from 'vue-router';
 import Avatar from '@/components/Avatar.vue';
 import { Disclosure, DisclosureButton, DisclosurePanel } from '@headlessui/vue';
+import Logo from '@/assets/Logo.svg?component';
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/vue/24/outline';
+import { SparklesIcon } from '@heroicons/vue/20/solid';
 import {
   PanelBottom,
   WalletCards,
@@ -173,6 +183,7 @@ import IconButton from '@/components/IconButton.vue';
 import AvatarDropDown from './AvatarDropDown.vue';
 import Button from '@/components/Button.vue';
 import { useReview } from '@/stores/review';
+import Card from '@/components/Card.vue';
 
 const open = ref(true);
 const currentRoute = useRoute();
@@ -186,5 +197,5 @@ const userNavigation = [
   { name: 'Settings', href: '#' },
   { name: 'Sign out', href: '#' },
 ];
-const { start } = useReview();
+const { start, ongoing, review } = useReview();
 </script>

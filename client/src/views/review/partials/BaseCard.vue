@@ -1,5 +1,5 @@
 <template>
-  <Card class="pl-3">
+  <Card>
     <div
       class="overflow-hidden rounded-lg bg-white p-4 pt-10 pb-14 px-9 dark:bg-slate-800"
     >

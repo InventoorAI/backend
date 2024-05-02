@@ -1,0 +1,21 @@
+[
+  {
+    "name": "Chapter 3 - Numerical Integration",
+    "description": "A deck for chapter 3 of the course",
+    "drawers": [
+      {
+        "name":"Computational Methods"
+      }
+    ],
+    "flashcards": [
+      {
+        "question": "What is the formula for the trapezoidal rule?",
+        "answer": "h/2 * (f(a) + f(b))"
+      },
+      {
+        "question": "What is the formula for the midpoint rule?",
+        "answer": "h * f((a+b)/2)"
+      }
+    ]
+  }
+]

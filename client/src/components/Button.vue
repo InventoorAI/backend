@@ -19,7 +19,7 @@
 </template>
 <script setup lang="ts">
 interface Props {
-  variant: 'hole' | 'button';
+  variant?: 'hole' | 'button';
 }
 const props = withDefaults(defineProps<Props>(), {
   variant: 'button',

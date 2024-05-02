@@ -3,6 +3,10 @@ module.exports = {
   content: ['./src/**/*.{html,js,vue,ts,tsx,jsx}'],
   theme: {
     extend: {
+      transitionProperty: {
+        width: 'width',
+        top: 'top',
+      },
       colors: {
         'primary-50': 'rgb(var(--primary-50))',
         'primary-100': 'rgb(var(--primary-100))',

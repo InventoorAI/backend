@@ -4,7 +4,7 @@
       <div
         class="h-full bg-green-500/70 rounded-md text-left"
         :style="{
-          width: `${10}%`,
+          width: `${percentage}%`,
         }"
       ></div>
     </div>

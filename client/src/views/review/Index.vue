@@ -10,7 +10,11 @@
         <Cog6ToothIcon class="h-6 w-6 text-slate-400" />
       </button>
 
-      <ReviewProgressBar :modelValue="10" :total="10" class="w-full" />
+      <ReviewProgressBar
+        :modelValue="stats.progress"
+        :total="10"
+        class="w-full"
+      />
 
       <div class="flex gap-2">
         <HeartIcon class="h-6 w-6 text-red-500" />

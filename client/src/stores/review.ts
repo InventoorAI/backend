@@ -24,6 +24,7 @@ export const useReview = createGlobalState(
     const progress = computed(() => review.correct.length + review.incorrect.length + review.skips.length)
     const currentCard = computed(() => review.cards[0])
     const lives = ref(3)
+    const ongoing = computed(() => lives.value > 0)
 
     const reset = () => {
       review.cards = flashcardData as App.Models.Flashcard[]
@@ -38,6 +39,7 @@ export const useReview = createGlobalState(
     }
 
 
-    return { review, stats: { correct, incorrect, skipped, progress }, lives, start, reset, currentCard }
+
+    return { review, stats: { correct: correct.value, incorrect: incorrect.value, skipped: skipped.value, progress: progress.value }, lives, start, reset, currentCard, ongoing }
   }
 )

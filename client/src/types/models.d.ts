@@ -9,16 +9,15 @@ declare namespace App.Models {
   export interface Deck {
     name: string;
     description: string;
-    drawers: string[];
-    flashcards: string[];
+    drawers?: string[];
+    flashcards?: string[];
   }
 
   export interface Drawer {
     name: string;
     description: string;
     tags: string[];
-    decks: string[];
-    flashcards: string[];
+    decks?: string[];
   }
 
 
@@ -36,8 +35,8 @@ declare namespace App.Models {
   export interface Flashcard {
     number: number;
     question: string;
-    tags: Tag[];
-    decks: Deck[];
+    tags?: Tag[];
+    decks?: Deck[];
     type:
     | 'Multiple Choice'
     | 'True/False'
