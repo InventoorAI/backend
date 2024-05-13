@@ -188,10 +188,7 @@ import Card from '@/components/Card.vue';
 const open = ref(true);
 const currentRoute = useRoute();
 
-const navigation = [
-  { name: 'Drawers', href: '/drawers', icon: PanelBottom },
-  { name: 'Decks', href: '/decks', icon: WalletCards },
-];
+const navigation = [{ name: 'Decks', href: '/decks', icon: WalletCards }];
 const userNavigation = [
   { name: 'Your Profile', href: '#' },
   { name: 'Settings', href: '#' },
