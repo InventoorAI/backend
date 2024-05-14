@@ -9,10 +9,10 @@ import ReportsIndexView from '@/views/reports/Index.vue'
 
 const routes = [
   {
-    path: '/drawers',
-    component: DrawerIndexView,
+    path: '/',
+    component: HomeView,
     meta: {
-      title: 'Drawers',
+      title: 'Home Page',
     },
   },
   {

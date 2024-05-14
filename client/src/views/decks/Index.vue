@@ -52,67 +52,9 @@
             eiusmod tempor incididunt ut labore et dolore magna aliqua.
           </p>
         </div>
-        <ul class="grid grid-cols-4 mt-4">
+        <ul class="grid grid-cols-4 mt-4 gap-4">
           <li v-for="deck in drawer.decks">
-            <RouterLink :to="`/deck/${deck.code}`">
-              <Card>
-                <div class="">
-                  <img
-                    :src="deck.imageUrl"
-                    class="object-cover w-full h-full -mt-1"
-                  />
-                  <div class="flex items-center gap-1 pl-1 pt-2">
-                    <Check class="h-4 text-green-400" />
-                    {{ deck.new }}
-
-                    <Repeat class="h-4 text-yellow-400" />
-                    {{ deck.due }}
-
-                    <RectangleVertical class="h-4 text-blue-400" />
-                    {{ deck.total }}
-                  </div>
-
-                  <h1 class="text-2xl mt-2 pl-3 font-medium">
-                    {{ deck.name }}
-                  </h1>
-                  <dl
-                    class="flex w-full flex-none justify-between gap-x-8 sm:w-auto"
-                  >
-                    <div class="flex -space-x-0.5 mt-2 pl-4">
-                      <dt class="sr-only">Commenters</dt>
-                      <dd v-for="(owner, idx) in deck.owners" :key="idx">
-                        <img
-                          class="h-6 w-6 rounded-full bg-gray-50 ring ring-green-500/20"
-                          :src="owner.imageUrl"
-                          :alt="owner.name"
-                        />
-                      </dd>
-                    </div>
-                    <div class="flex w-16 gap-x-2.5">
-                      <dt>
-                        <span class="sr-only">Total comments</span>
-                        <CheckCircleIcon
-                          v-if="deck.status === 'resolved'"
-                          class="h-6 w-6 text-gray-400"
-                          aria-hidden="true"
-                        />
-                        <ChatBubbleLeftIcon
-                          v-else
-                          class="h-6 w-6 text-gray-400"
-                          aria-hidden="true"
-                        />
-                      </dt>
-                      <dd class="text-sm leading-6 text-gray-900">
-                        <!-- {{ discussion.totalComments }} -->
-                      </dd>
-                    </div>
-                  </dl>
-                  <p class="text-slate-300/30 text-md font-thin mt-2">
-                    {{ deck.description }}
-                  </p>
-                </div>
-              </Card>
-            </RouterLink>
+            <Deck :deck="deck" />
           </li>
         </ul>
       </li>
@@ -141,4 +83,5 @@ import {
 import BreadCrumbs from '@/components/BreadCrumbs.vue';
 import SearchBar from '@/components/SearchBar.vue';
 import { RouterLink } from 'vue-router';
+import Deck from './partials/Deck.vue';
 </script>
