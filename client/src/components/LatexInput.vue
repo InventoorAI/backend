@@ -14,7 +14,6 @@
 </template>
 <script setup lang="ts">
 import { useVModel } from '@vueuse/core';
-import InputText from 'primevue/inputtext';
 
 interface Props {
   modelValue: string;

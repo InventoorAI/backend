@@ -37,5 +37,5 @@ module.exports = {
       sans: ['Karla'],
     },
   },
-  plugins: [],
+  plugins: [require('@tailwindcss/forms')],
 };

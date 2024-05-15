@@ -14,7 +14,6 @@
 </template>
 <script setup lang="ts">
 import { useVModel } from '@vueuse/core';
-import TextArea from 'primevue/textarea';
 interface Props {
   modelValue: string;
 }

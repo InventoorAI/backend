@@ -34,8 +34,8 @@
         </span>
       </div>
       <div class="px-2 pb-3">
-        <div class="flex items-baseline justify-between">
-          <RouterLink :to="`/decks/${deck.id}`">
+        <div class="flex items-baseline justify-between w-full pr-2">
+          <RouterLink :to="`/decks/${deck.id}`" class="w-full">
             <h1
               class="text-xl mt-2 pl-1 font-medium hover:text-green-400/80 transition"
             >
@@ -97,6 +97,7 @@ import DifficultyBar from '@/components/DifficultyBar.vue';
 import DifficultyLevel from '@/components/DifficultyLevel.vue';
 import Badge from '@/components/Badge.vue';
 import { RouterLink } from 'vue-router';
+import Spinner from '@/components/Spinner.vue';
 
 interface Props {
   deck: App.Models.Deck;

@@ -5,6 +5,7 @@
       '-translate-y-14 hover:translate-y-0 transition ease-in-out ': !open,
     }"
   >
+    <CommandPalette v-model:open="palette.open" />
     <div class="bg-green-400/40">
       <Disclosure as="nav" v-slot="{ open }">
         <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -178,12 +179,14 @@ import {
   Bell,
   Eclipse,
 } from 'lucide-vue-next';
-import { ref } from 'vue';
+import { reactive, ref } from 'vue';
 import IconButton from '@/components/IconButton.vue';
 import AvatarDropDown from './AvatarDropDown.vue';
 import Button from '@/components/Button.vue';
 import { useReview } from '@/stores/review';
 import Card from '@/components/Card.vue';
+import CommandPalette from '@/components/CommandPalette.vue';
+import { onKeyStroke } from '@vueuse/core';
 
 const open = ref(true);
 const currentRoute = useRoute();
@@ -195,4 +198,11 @@ const userNavigation = [
   { name: 'Sign out', href: '#' },
 ];
 const { start, ongoing, review } = useReview();
+
+const palette = reactive({ open: false });
+
+onKeyStroke(['cmd', 'k'], (e) => {
+  e.preventDefault();
+  palette.open = !palette.open;
+});
 </script>

@@ -1,6 +1,6 @@
 <template>
   <div
-    class="bg-green-400/70 rounded-lg pl-1.5 text-white w-full pr-[1.2px] py-[1.2px] shadow"
+    class="bg-green-400/70 rounded-lg pl-1.5 text-white w-full pr-[1.2px] pb-1 pt-[1.5px] shadow"
   >
     <div
       class="bg-slate-800 rounded-lg text-white/80 py-0.5 divide-y divide-gray-200 overflow-hidden"
