@@ -109,6 +109,18 @@
           >
           <DifficultyComboBox v-model="form.difficulty" />
         </div>
+
+        <div>
+          <label
+            for="difficulty"
+            class="mb-2 text-sm font-medium text-slate-900 dark:text-white flex items-center"
+          >
+            <TagIcon class="w-4 h-4 mr-1 text-slate-500" aria-hidden="true" />
+            Tag</label
+          >
+          <TagSelect v-model="form.tags" class="w-full" />
+        </div>
+        <PropertyList />
         <div>
           <label
             for="price"
@@ -154,9 +166,7 @@
             placeholder="Enter event description here"
           ></textarea>
         </div>
-        <div
-          class="bottom-0 left-0 flex justify-center w-full pb-4 space-x-4 md:px-4 md:absolute"
-        >
+        <div class="flex w-full pb-4 space-x-4 md:px-4 md:absolute">
           <button
             type="submit"
             class="text-white w-full justify-center bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
@@ -195,7 +205,9 @@
 import { PhotoIcon } from '@heroicons/vue/24/outline';
 import { reactive } from 'vue';
 import DifficultyComboBox from './DifficultyComboBox.vue';
-import { FlagIcon } from 'lucide-vue-next';
+import { FlagIcon, TagIcon } from 'lucide-vue-next';
+import TagSelect from './TagSelect.vue';
+import PropertyList from './PropertyList.vue';
 
 const form = reactive({
   id: 1,
@@ -248,84 +260,7 @@ const form = reactive({
   name: 'Significance and Error',
   description:
     "A deck for chapter 3 of the course of Computational methods. This deck contains cards about numerical integration, including techniques like the trapezoidal rule, Simpson's rule, and Romberg algorithm, along with implementation in Octave",
-  tags: [
-    {
-      name: 'Mathematics',
-      color: 'green',
-      icon: 'Maths',
-    },
-    {
-      name: 'University',
-      color: 'blue',
-      icon: 'University',
-    },
-  ],
-  flashcards: [
-    {
-      number: 1,
-      question: 'What is the capital of France?',
-      tags: [
-        {
-          name: 'Trivia',
-          color: 'purple',
-        },
-      ],
-      decks: [],
-      type: 'Multiple Choice',
-      level: 'Easy',
-      callout: 'New Card',
-      options: [
-        {
-          value: 'Paris',
-          isCorrect: true,
-          imgPath: 'https://source.unsplash.com/random/900x700/?paris',
-        },
-        {
-          value: 'London',
-          isCorrect: false,
-          imgPath: 'https://source.unsplash.com/random/900x700/?london',
-        },
-        {
-          value: 'Berlin',
-          isCorrect: false,
-          imgPath: 'https://source.unsplash.com/random/900x700/?berlin',
-        },
-        {
-          value: 'Madrid',
-          isCorrect: false,
-          imgPath: 'https://source.unsplash.com/random/900x700/?madrid',
-        },
-      ],
-    },
-    {
-      number: 2,
-      question: 'Calculate $\\int{x^2}dx$',
-      tags: [
-        {
-          name: 'Mathematics',
-          color: 'green',
-        },
-      ],
-      decks: [],
-      type: 'Steps',
-      level: 'Easy',
-      callout: 'New Card',
-    },
-    {
-      number: 3,
-      question: 'What is the quadratic formula',
-      tags: [
-        {
-          name: 'Mathematics',
-          color: 'green',
-        },
-      ],
-      decks: [],
-      type: 'Multiple Choice',
-      level: 'Easy',
-      callout: 'New Card',
-    },
-  ],
+  tags: [],
 });
 const onFileChange = (e: Event) => {
   const target = e.target as HTMLInputElement;
