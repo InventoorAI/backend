@@ -16,7 +16,7 @@
     "decks": [
       {
         "id": 1,
-        "difficulty": "medium",
+        "difficulty": "easy",
         "imageUrl": "/src/assets/images/computational_methods.jpg",
         "total": 10,
         "new": 5,
