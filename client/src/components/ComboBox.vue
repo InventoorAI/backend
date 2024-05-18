@@ -2,7 +2,7 @@
   <Combobox as="div" v-model="selected" @update:modelValue="query = ''">
     <div class="relative mt-2">
       <ComboboxInput
-        class="bg-slate-50 border border-slate-300 text-slate-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-slate-700 dark:border-slate-600 dark:placeholder-slate-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+        class="bg-slate-50 border border-slate-300 text-slate-900 text-sm rounded-md focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-slate-900 dark:border-slate-600 dark:placeholder-slate-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
         @change="query = $event.target.value"
         @blur="query = ''"
         :display-value="displayValue as any"

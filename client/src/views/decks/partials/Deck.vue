@@ -47,7 +47,10 @@
         <dl class="flex w-full flex-none justify-between gap-x-8 sm:w-auto">
           <div class="flex -space-x-0.5 mt-2 pl-2">
             <dt class="sr-only">Commenters</dt>
-            <dd v-for="(owner, idx) in deck.owners.slice(0, 3)" :key="idx">
+            <dd
+              v-for="(owner, idx) in deck.contributors.slice(0, 3)"
+              :key="idx"
+            >
               <img
                 class="h-6 w-6 rounded-full bg-gray-50 ring-1 ring-green-500/80"
                 :src="owner.imageUrl"
@@ -57,7 +60,7 @@
             <span
               class="bg-slate-400/50 rounded-full text-slate-100/80 font-semibold text-xs px-1 h-6 w-6 flex items-center justify-center ring-1 ring-green-500/80"
             >
-              +{{ deck.owners.length - 3 }}
+              +{{ deck.contributors.length - 3 }}
             </span>
           </div>
           <div class="flex w-16 gap-x-2.5">

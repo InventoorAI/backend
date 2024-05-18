@@ -27,7 +27,13 @@ declare namespace App.Models {
     suspended: number;
     owners?: User[];
     coverUrl?: string;
+    properties: Property[];
 
+  }
+  export interface Property {
+    name: string;
+    value: string;
+    type: "text" | "number" | "date" | "time" | "datetime" | "color" | "range" | "file" | "checkbox" | "select"
   }
 
   export interface Drawer {

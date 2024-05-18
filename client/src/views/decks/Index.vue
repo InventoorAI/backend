@@ -1,6 +1,6 @@
 <template>
   <div>
-    <CreateDrawer />
+    <CreateDrawer v-model:open="open" />
     <div>
       <BreadCrumbs />
       <div class="mt-2 md:flex md:items-center md:justify-between">
@@ -41,6 +41,7 @@
                 Edit
               </button>
               <button
+                @click="open = true"
                 type="button"
                 class="ml-3 inline-flex items-center rounded-md bg-green-500 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-green-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-500"
               >
@@ -86,6 +87,7 @@ import SearchBar from '@/components/SearchBar.vue';
 import { RouterLink } from 'vue-router';
 import Deck from './partials/Deck.vue';
 import CreateDrawer from './partials/CreateDrawer.vue';
+import { Dialog, TransitionRoot } from '@headlessui/vue';
 const query = reactive({
   search: '',
 });
@@ -93,4 +95,5 @@ const query = reactive({
 onMounted(() => {
   DataService.getDrawers().then((data) => (drawers.value = data.slice(0, 12)));
 });
+const open = ref(false);
 </script>

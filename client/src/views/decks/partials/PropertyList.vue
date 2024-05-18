@@ -3,11 +3,16 @@
     <Column field="key" header="" class="text-sm"></Column>
     <Column field="key" header="Property" sortable class="text-sm"></Column>
     <Column field="value" header="Value" class="text-sm"></Column>
+    <Column field="visible" header="Visible" class="text-sm"></Column>
   </DataTable>
 </template>
 <script setup lang="ts">
 import DataTable from 'primevue/datatable';
 import Column from 'primevue/column';
 import { ref } from 'vue';
-const properties = ref([]);
+
+interface Props {
+  properties: App.Models.Property[];
+}
+const props = defineProps<Props>();
 </script>
