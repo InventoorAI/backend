@@ -95,5 +95,5 @@ const query = reactive({
 onMounted(() => {
   DataService.getDrawers().then((data) => (drawers.value = data.slice(0, 12)));
 });
-const open = ref(false);
+const open = ref(true);
 </script>

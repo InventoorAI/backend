@@ -1,257 +1,192 @@
 <template>
   <!-- drawer component -->
 
-  <TransitionRoot as="template" :show="open">
-    <Dialog class="relative z-10" @close="open = false">
-      <div class="fixed inset-0" />
-      <div
-        class="fixed top-0 right-0 z-40 w-full h-screen max-w-xs p-4 px-6 overflow-y-auto transition-transform bg-white dark:bg-slate-800"
-        tabindex="-1"
-        aria-labelledby="drawer-label"
-        aria-hidden="true"
-      >
-        <h5
-          id="drawer-label"
-          class="inline-flex items-center mb-6 text-sm font-semibold text-slate-500 uppercase dark:text-slate-400"
-        >
-          New Deck
-        </h5>
-        <button
-          type="button"
-          @click="open = false"
-          data-drawer-dismiss="drawer-create-deck-default"
-          aria-controls="drawer-create-deck-default"
-          class="text-slate-400 bg-transparent hover:bg-slate-200 hover:text-slate-900 rounded-lg text-sm p-1.5 absolute top-2.5 right-2.5 inline-flex items-center dark:hover:bg-slate-600 dark:hover:text-white"
-        >
-          <X class="w-4 h-4" aria-hidden="true" />
-
-          <span class="sr-only">Close menu</span>
-        </button>
-        <form action="#">
-          <ul class="space-y-3">
-            <li v-for="(property, name) in newForm">
-              <label
-                for="difficulty"
-                class="mb-2 text-sm font-medium text-slate-900 dark:text-white flex items-center capitalize justify-between"
-              >
-                <div class="flex items-center">
-                  <button
-                    class="text-slate-500 hover:text-slate-400"
-                    type="button"
-                  >
-                    <GripVertical class="w-4 h-4 mr-1" aria-hidden="true" />
-                  </button>
-
-                  <button
-                    class="text-slate-500 hover:text-slate-400"
-                    type="button"
-                  >
-                    <component
-                      v-if="property.icon"
-                      :is="property.icon"
-                      class="w-4 h-4 mr-2"
-                      aria-hidden="true"
-                    />
-                    <Brush class="w-4 h-4 mr-2" aria-hidden="true" v-else />
-                  </button>
-
-                  <input
-                    type="text"
-                    class="bg-transparent border-none outline-none focus:ring-0 text-sm px-0 py-0 capitalize"
-                    :value="name"
-                  />
-                </div>
+  <Sidebar v-model:visible="open" position="right" class="w-full max-w-md">
+    <template #header>
+      <div class="flex items-center">
+        <SquareAsterisk class="w-5 h-6 text-slate-400" />
+        <h2 id="drawer-label" class="ml-2 text-lg font-semibold">New Deck</h2>
+      </div>
+    </template>
+    <div
+      class=""
+      tabindex="-1"
+      aria-labelledby="drawer-label"
+      aria-hidden="true"
+    >
+      <form action="#">
+        <ul class="space-y-3">
+          <li v-for="(property, name) in newForm">
+            <label
+              for="difficulty"
+              class="mb-2 text-sm font-medium text-slate-900 dark:text-white flex items-center capitalize justify-between"
+            >
+              <div class="flex items-center">
+                <button
+                  v-if="property.movable"
+                  class="text-slate-500 hover:text-slate-400"
+                  type="button"
+                >
+                  <GripVertical class="w-4 h-4 mr-1" aria-hidden="true" />
+                </button>
 
                 <button
+                  class="text-slate-500 hover:text-slate-400"
                   type="button"
-                  class="hover:text-slate-400 text-slate-500"
                 >
-                  <Pencil class="w-3.5" />
+                  <component
+                    v-if="property.icon"
+                    :is="property.icon"
+                    class="w-4 h-4 mr-2"
+                    aria-hidden="true"
+                  />
+                  <Brush class="w-4 h-4 mr-2" aria-hidden="true" v-else />
                 </button>
-              </label>
-              <InputText v-model="newForm[name].value" class="w-full" />
-            </li>
-          </ul>
 
-          <!--   <!-- Cover Image -->
-          <!-- -->
-          <!-- -->
-          <!---->
-          <!--   <div class="space-y-4"> -->
-          <!--     <div class="col-span-full"> -->
-          <!--       <div -->
-          <!--         class="mt-2 flex justify-center rounded-lg border border-dashed border-slate-500/80 px-6 py-10" -->
-          <!--       > -->
-          <!--         <div class="text-center"> -->
-          <!--           <PhotoIcon -->
-          <!--             class="mx-auto h-12 w-12 text-slate-500" -->
-          <!--             aria-hidden="true" -->
-          <!--           /> -->
-          <!--           <div class="mt-4 flex text-sm leading-6 text-slate-600"> -->
-          <!--             <label -->
-          <!--               for="file-upload" -->
-          <!--               class="relative cursor-pointer rounded-md font-semibold text-green-400/60 focus-within:outline-none focus-within:ring-2 focus-within:ring-green-600 focus-within:ring-offset-2 hover:text-green-500 px-1" -->
-          <!--             > -->
-          <!--               <span>Upload a file</span> -->
-          <!--               <input -->
-          <!--                 id="file-upload" -->
-          <!--                 name="file-upload" -->
-          <!--                 @change="onFileChange" -->
-          <!--                 type="file" -->
-          <!--                 class="sr-only" -->
-          <!--               /> -->
-          <!--             </label> -->
-          <!--             <p class="pl-1">or drag and drop</p> -->
-          <!--           </div> -->
-          <!--           <p class="text-xs leading-5 text-slate-600"> -->
-          <!--             PNG, JPG, GIF up to 10MB -->
-          <!--           </p> -->
-          <!--         </div> -->
-          <!--       </div> -->
-          <!--     </div> -->
-          <!--     <div class="pt-4"> -->
-          <!--       <label -->
-          <!--         for="difficulty" -->
-          <!--         class="mb-2 text-sm font-medium text-slate-900 dark:text-white flex items-center gap-2" -->
-          <!--       > -->
-          <!--         <FolderPen class="w-4 text-slate-500" /> -->
-          <!--         Name</label -->
-          <!--       > -->
-          <!--       <InputText id="name" v-model="form.name" class="w-full" /> -->
-          <!--     </div> -->
-          <!---->
-          <!--     <div> -->
-          <!--       <label -->
-          <!--         for="difficulty" -->
-          <!--         class="mb-2 text-sm font-medium text-slate-900 dark:text-white flex items-center" -->
-          <!--       > -->
-          <!--         <FlagIcon class="w-4 h-4 mr-1 text-slate-500" aria-hidden="true" /> -->
-          <!--         Difficulty</label -->
-          <!--       > -->
-          <!--       <DifficultyComboBox v-model="form.difficulty" /> -->
-          <!--     </div> -->
-          <!---->
-          <!--     <div> -->
-          <!--       <label -->
-          <!--         for="difficulty" -->
-          <!--         class="mb-2 text-sm font-medium text-slate-900 dark:text-white flex items-center" -->
-          <!--       > -->
-          <!--         <TagIcon class="w-4 h-4 mr-1 text-slate-500" aria-hidden="true" /> -->
-          <!--         Tag</label -->
-          <!--       > -->
-          <!--       <TagSelect v-model="form.tags" class="w-full" /> -->
-          <!--     </div> -->
-          <!--     <!-- Contributor Section -->
-          <!-- -->
-          -->
-          <!--     <div> -->
-          <!--       <label class="flex items-center gap-1"> -->
-          <!--         <Users class="w-4 h-4 text-slate-500" /> -->
-          <!--         <h3 class="text-sm font-medium text-slate-100">Contributors</h3> -->
-          <!--       </label> -->
-          <!--       <div class="sm:col-span-2 mt-2"> -->
-          <!--         <div class="flex -space-x-1"> -->
-          <!--           <RouterLink -->
-          <!--             v-for="person in form.contributors" -->
-          <!--             :key="person.email" -->
-          <!--             :to="`/users/${person.email}`" -->
-          <!--             class="flex-shrink-0 rounded-full hover:opacity-75" -->
-          <!--           > -->
-          <!--             <img -->
-          <!--               class="inline-block h-6 w-6 rounded-full border border-green-400/80" -->
-          <!--               :src="person.imageUrl" -->
-          <!--               :alt="person.name" -->
-          <!--             /> -->
-          <!--           </RouterLink> -->
-          <!---->
-          <!--           <button -->
-          <!--             type="button" -->
-          <!--             class="rounded-full bg-green-400 w-6 h-6 flex items-center justify-center" -->
-          <!--           > -->
-          <!--             <span class="absolute -inset-2" /> -->
-          <!--             <span class="sr-only">Add team member</span> -->
-          <!--             <PlusIcon class="h-4 w-4 text-white" aria-hidden="true" /> -->
-          <!--           </button> -->
-          <!--         </div> -->
-          <!--       </div> -->
-          <!--     </div> -->
-          <!---->
-          <!--     <!-- <PropertyList :properties="form.properties" /> -->
-          -->
-          <!---->
-          <!--     <div> -->
-          <!--       <label -->
-          <!--         for="difficulty" -->
-          <!--         class="mb-2 text-sm font-medium text-slate-900 dark:text-white flex items-center" -->
-          <!--       > -->
-          <!--         <Text class="w-4 h-4 mr-1 text-slate-500" aria-hidden="true" /> -->
-          <!--         Description</label -->
-          <!--       > -->
-          <!--       <Textarea v-model="value" rows="5" cols="30" /> -->
-          <!--     </div> -->
-          <!--     <div class="flex w-full pb-4 space-x-4 md:px-4 md:absolute"> -->
-          <!--       <button -->
-          <!--         type="submit" -->
-          <!--         class="text-white w-full justify-center bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800" -->
-          <!--       > -->
-          <!--         Add deck -->
-          <!--       </button> -->
-          <!--       <button -->
-          <!--         type="button" -->
-          <!--         data-drawer-dismiss="drawer-create-deck-default" -->
-          <!--         aria-controls="drawer-create-deck-default" -->
-          <!--         class="inline-flex w-full justify-center text-slate-500 items-center bg-white hover:bg-slate-100 focus:ring-4 focus:outline-none focus:ring-primary-300 rounded-lg border border-slate-200 text-sm font-medium px-5 py-2.5 hover:text-slate-900 focus:z-10 dark:bg-slate-700 dark:text-slate-300 dark:border-slate-500 dark:hover:text-white dark:hover:bg-slate-600 dark:focus:ring-slate-600" -->
-          <!--       > -->
-          <!--         <svg -->
-          <!--           aria-hidden="true" -->
-          <!--           class="w-5 h-5 -ml-1 sm:mr-1" -->
-          <!--           fill="none" -->
-          <!--           stroke="currentColor" -->
-          <!--           viewBox="0 0 24 24" -->
-          <!--           xmlns="http://www.w3.org/2000/svg" -->
-          <!--         > -->
-          <!--           <path -->
-          <!--             stroke-linecap="round" -->
-          <!--             stroke-linejoin="round" -->
-          <!--             stroke-width="2" -->
-          <!--             d="M6 18L18 6M6 6l12 12" -->
-          <!--           ></path> -->
-          <!--         </svg> -->
-          <!--         Cancel -->
-          <!--       </button> -->
-          <!--     </div> -->
-          <!--   </div> -->
-        </form>
-      </div>
-    </Dialog>
-  </TransitionRoot>
+                <input
+                  type="text"
+                  class="bg-transparent border-none outline-none focus:ring-0 text-sm px-0 py-0 capitalize"
+                  :value="name"
+                />
+              </div>
+
+              <button
+                type="button"
+                class="hover:text-slate-400 text-slate-500"
+                v-if="property.editable"
+              >
+                <Pencil class="w-3.5" />
+              </button>
+              <button
+                type="button"
+                class="hover:text-slate-400 text-red-500/80"
+                v-if="property.removable"
+              >
+                <Trash class="w-3.5" />
+              </button>
+            </label>
+            <InputText
+              v-model="newForm[name].value"
+              class="w-full"
+              v-if="property.type == 'text'"
+            />
+            <Dropdown
+              v-model="newForm[name].value"
+              class="w-full"
+              v-if="property.type == 'select'"
+              :options="property.options"
+              optionLabel="name"
+              placeholder="Select a difficulty"
+            >
+              <template #value="{ value }">
+                <div v-if="value.value" class="flex items-center">
+                  <div class="flex items-center gap-2">
+                    <component :is="value.icon" class="w-4 h-4" />
+                    {{ value.name }}
+                  </div>
+                </div>
+                <span v-else>
+                  <span class="text-slate-500 dark:text-slate-400"
+                    >Select a difficulty</span
+                  >
+                </span>
+              </template>
+              <template #option="{ option }">
+                <div class="flex items-center gap-1">
+                  <component :is="option.icon" class="w-4 h-4 mr-2" />
+                  <span>{{ option.name }}</span>
+                </div>
+              </template>
+            </Dropdown>
+
+            <FileUpload
+              v-if="property.type == 'file'"
+              mode="basic"
+              name="demo[]"
+              url="/api/upload"
+              accept="image/*"
+              :maxFileSize="1000000"
+              @upload="onUpload"
+            />
+
+            <UserSelect
+              :options="users"
+              class="w-full"
+              :loading="false"
+              v-model="newForm[name].value"
+              v-if="property.type == 'users'"
+            />
+
+            <Textarea
+              class="w-full"
+              rows="5"
+              cols="30"
+              v-model="newForm[name].value"
+              v-if="property.type == 'longtext'"
+            />
+
+            <MultiSelect
+              v-if="property.type == 'multiselect'"
+              v-model="newForm[name].value"
+              class="w-full"
+              display="chip"
+              :options="property.options"
+              optionLabel="name"
+              placeholder="Select tags"
+            >
+              <template #chip="{ value }">
+                <div class="flex items-center">
+                  <span>{{ value.name }}</span>
+                </div>
+              </template>
+            </MultiSelect>
+          </li>
+        </ul>
+      </form>
+    </div>
+  </Sidebar>
+  <!-- <TransitionRoot as="template" :show="open"> -->
+  <!--   <Dialog class="relative z-10" @close="open = false"></Dialog> -->
+  <!-- </TransitionRoot> -->
 </template>
 <script setup lang="ts">
-import Label from 'primevue/label';
-import { PhotoIcon } from '@heroicons/vue/24/outline';
 import { reactive } from 'vue';
-import Textarea from 'primevue/textarea';
-import DifficultyComboBox from './DifficultyComboBox.vue';
 import {
+  Angry,
+  Annoyed,
   Brush,
+  CircleArrowDown,
   FlagIcon,
   FolderPen,
+  Frown,
   GripVertical,
-  Pen,
+  Meh,
   Pencil,
-  PlusIcon,
-  TagIcon,
-  Text,
-  User2,
-  Users,
+  Smile,
+  SquareAsterisk,
+  Trash,
   X,
 } from 'lucide-vue-next';
-import TagSelect from './TagSelect.vue';
-import PropertyList from './PropertyList.vue';
 import InputText from 'primevue/inputtext';
 import { Dialog, TransitionRoot } from '@headlessui/vue';
 import { useVModel } from '@vueuse/core';
+import Dropdown from 'primevue/dropdown';
+import FileUpload, { FileUploadUploadEvent } from 'primevue/fileupload';
+import UserSelect from '@/components/UserSelect.vue';
+import Textarea from 'primevue/textarea';
+import MultiSelect from 'primevue/multiselect';
+import Sidebar from 'primevue/sidebar';
 
+const users: App.Models.User[] = [
+  {
+    name: 'John Doe',
+    imageUrl:
+      'https://images.unsplash.com/photo-1505840717430-882ce147ef2d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+    email: 'john.doe@gmail.com',
+    verified: true,
+    password: 'MeinLeben2003+',
+  },
+];
 const newForm = reactive({
   name: {
     type: 'text',
@@ -265,7 +200,7 @@ const newForm = reactive({
     default: 'Chapter 1',
   },
   difficulty: {
-    type: 'text',
+    type: 'select',
     icon: FlagIcon,
     value: 'easy',
     required: true,
@@ -274,13 +209,32 @@ const newForm = reactive({
     movable: false,
     editable: false,
     default: 'easy',
-    items: ['easy', 'medium', 'hard'],
+    options: [
+      { name: 'Easy', value: 'easy', icon: Smile },
+      { name: 'Medium', value: 'medium', icon: Meh },
+      { name: 'Hard', value: 'hard', icon: Annoyed },
+      { name: 'Very Hard', value: 'very hard', icon: Frown },
+      { name: 'Expert', value: 'expert', icon: Angry },
+    ],
+  },
+  cover: {
+    type: 'file',
+  },
+  contributors: {
+    type: 'users',
+  },
+  description: {
+    type: 'longtext',
+  },
+  tags: {
+    type: 'multiselect',
+    options: [{ name: 'Computer Science', value: 'computerscience' }],
   },
 });
+const onUpload = (e: FileUploadUploadEvent) => {
+  console.log(e);
+};
 const form = reactive({
-  name: '',
-  difficulty: 'easy',
-  imageUrl: '/src/assets/images/computational_methods.jpg',
   properties: [
     {
       key: 'Chapter',
@@ -293,29 +247,6 @@ const form = reactive({
       value: 'CM-101',
     },
   ],
-  contributors: [
-    {
-      name: 'John Doe',
-      imageUrl:
-        'https://images.unsplash.com/photo-1505840717430-882ce147ef2d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-      email: 'john.doe@gmail.com',
-    },
-    {
-      name: 'John Doe',
-      imageUrl:
-        'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-      email: 'john.doe@gmail.com',
-    },
-    {
-      name: 'John Doe',
-      imageUrl:
-        'https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-      email: 'john.doe@gmail.com',
-    },
-  ],
-  coverUrl: 'https://source.unsplash.com/random/900x700/?maths',
-  description:
-    "A deck for chapter 3 of the course of Computational methods. This deck contains cards about numerical integration, including techniques like the trapezoidal rule, Simpson's rule, and Romberg algorithm, along with implementation in Octave",
   tags: [],
 });
 
