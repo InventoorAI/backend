@@ -7,7 +7,7 @@
       >
         <span class="absolute -inset-1.5" />
         <span class="sr-only">Open user menu</span>
-        <Avatar :status="status" />
+        <Avatar :status="status" showStatus />
       </MenuButton>
     </div>
     <transition

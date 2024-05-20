@@ -122,7 +122,7 @@
           <div class="border-t border-gray-700 pb-3 pt-4">
             <div class="flex items-center px-5 sm:px-6">
               <div class="flex-shrink-0">
-                <Avatar />
+                <Avatar showStatus />
               </div>
               <div class="ml-3">
                 <div class="text-base font-medium text-white">

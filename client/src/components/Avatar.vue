@@ -1,7 +1,8 @@
 <template>
-  <div class="relative">
-    <Avatar v-bind="avatarProps" class="w-10 h-10" />
+  <div class="relative min-w-9 h-full">
+    <Avatar v-bind="avatarProps" class="h-full w-auto" />
     <span
+      v-if="showStatus"
       class="w-2 h-2 rounded-full absolute right-0 top-0 mt-0.5 mr-0.5 border border-white"
       :class="{
         'animate-pulse  bg-green-500/80': status === 'online',
@@ -16,8 +17,10 @@ import { Avatar, Factory } from 'vue3-avataaars';
 const avatarProps = Factory();
 interface Props {
   status: 'online' | 'offline' | 'away';
+  showStatus: boolean;
 }
 withDefaults(defineProps<Props>(), {
   status: 'offline',
+  showStatus: false,
 });
 </script>

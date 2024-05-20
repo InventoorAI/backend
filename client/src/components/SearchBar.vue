@@ -22,7 +22,7 @@
           name="desktop-search-candidate"
           id="desktop-search-candidate"
           class="hidden w-full rounded-none rounded-l-md border-0 py-1.5 pl-10 text-sm leading-6 text-slate-900 placeholder:text-slate-400 focus:ring-2 ring-offset-2 ring-offset-slate-800 focus:outline-none focus:border-none focus:ring-green-400 sm:block transition"
-          placeholder="Search Decks"
+          :placeholder="placeholder"
           v-model="search"
         />
       </div>
@@ -54,11 +54,14 @@ import { Menu, MenuButton } from '@headlessui/vue';
 import { useVModel, useVModels } from '@vueuse/core';
 interface Props {
   search: string;
+  placeholder: string;
 }
 interface Emits {
   (e: 'update:search', search: string): void;
 }
 const emits = defineEmits<Emits>();
-const props = defineProps<Props>();
+const props = withDefaults(defineProps<Props>(), {
+  placeholder: 'Search',
+});
 const search = useVModel(props, 'search', emits);
 </script>
