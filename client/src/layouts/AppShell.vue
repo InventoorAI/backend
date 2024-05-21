@@ -1,12 +1,12 @@
 <template>
   <div
-    class="pb-10"
+    class="top-0 sticky"
     :class="{
       '-translate-y-14 hover:translate-y-0 transition ease-in-out ': !open,
     }"
   >
     <CommandPalette v-model:open="palette.open" />
-    <div class="bg-green-400/40">
+    <div class="bg-gradient-to-b from-slate-950 to-slate-400/0 pt-6 pb-8">
       <Disclosure as="nav" v-slot="{ open }">
         <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div class="flex h-16 justify-between">
@@ -45,9 +45,6 @@
                   <component :is="item.icon" />
                 </RouterLink>
 
-                <!-- TODO: Button tracks current review state, starts a new one if -->
-                <!-- none is ongoing, and navigates to the review page if one is -->
-                <!-- ongoing -->
                 <RouterLink
                   to="/review"
                   key="review"
@@ -157,7 +154,7 @@
     </div>
   </div>
   <div>
-    <main>
+    <main class="text-slate-400">
       <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
         <slot name="main" />
       </div>
@@ -187,6 +184,7 @@ import { useReview } from '@/stores/review';
 import Card from '@/components/Card.vue';
 import CommandPalette from '@/components/CommandPalette.vue';
 import { onKeyStroke } from '@vueuse/core';
+import { useBreadcrumbs } from '@/composables/breadcrumbs';
 
 const open = ref(true);
 const currentRoute = useRoute();
@@ -205,4 +203,5 @@ onKeyStroke(['cmd', 'k'], (e) => {
   e.preventDefault();
   palette.open = !palette.open;
 });
+const { links } = useBreadcrumbs();
 </script>

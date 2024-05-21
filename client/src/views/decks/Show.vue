@@ -387,4 +387,6 @@ import Badge from '@/components/Badge.vue';
 import Card from '@/components/Card.vue';
 import Avatar from '@/components/Avatar.vue';
 import ContextMenu from 'primevue/contextmenu';
+import ProgressBar from 'primevue/progressbar';
+import ReviewProgressBar from '../review/partials/ReviewProgressBar.vue';
 </script>

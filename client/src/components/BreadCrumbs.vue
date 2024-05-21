@@ -1,21 +1,21 @@
 <template>
   <div>
     <nav class="sm:hidden" aria-label="Back">
-      <a
-        href="#"
+      <RouterLink
         class="flex items-center text-sm font-medium text-gray-400 hover:text-gray-200"
+        to="/"
       >
         <ChevronLeftIcon
-          class="-ml-1 mr-1 h-5 w-5 flex-shrink-0 text-gray-500"
+          class="-ml-1 mr-1 h-5 w-5 flex-shrink-0"
           aria-hidden="true"
         />
         Back
-      </a>
+      </RouterLink>
     </nav>
     <nav class="hidden sm:flex" aria-label="Breadcrumb">
-      <ol role="list" class="flex items-center space-x-2">
+      <ol role="list" class="flex items-center">
         <li>
-          <div class="flex">
+          <div class="flex mr-1">
             <RouterLink
               to="/"
               class="text-sm font-medium text-gray-400 hover:text-gray-200"
@@ -24,17 +24,25 @@
             </RouterLink>
           </div>
         </li>
-        <li>
-          <div class="flex items-center">
+        <li v-for="link in links" class="flex items-center gap-2">
+          <div>
             <ChevronRightIcon
-              class="h-5 w-5 flex-shrink-0 text-gray-500"
+              class="h-5 w-5 flex-shrink-0 text-gray-400"
               aria-hidden="true"
             />
+          </div>
+          <div class="">
             <RouterLink
-              to="#"
-              class="ml-4 text-sm font-medium text-gray-400 hover:text-gray-200"
-              >Decks</RouterLink
+              :to="link.href"
+              class="text-sm font-medium text-gray-400 hover:text-gray-200 capitalize flex items-center gap-2"
             >
+              <component
+                :is="link.icon"
+                class="h-5 w-5 flex-shrink-0"
+                aria-hidden="true"
+              />
+              {{ link.name }}
+            </RouterLink>
           </div>
         </li>
       </ol>
@@ -42,16 +50,14 @@
   </div>
 </template>
 <script setup lang="ts">
-interface Props {
-  links: {
-    name: string;
-    href: string;
-    current: boolean;
-  }[];
-}
-const props = defineProps<Props>();
-import Home from '@/views/Home.vue';
+export type Link = {
+  name: string;
+  href: string;
+  icon?: any;
+};
+import { useBreadcrumbs } from '@/composables/breadcrumbs';
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/vue/20/solid';
 import { HomeIcon } from 'lucide-vue-next';
 import { RouterLink } from 'vue-router';
+const { links } = useBreadcrumbs();
 </script>
