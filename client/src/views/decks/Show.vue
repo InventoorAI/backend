@@ -120,14 +120,21 @@ import SearchBar from '@/components/SearchBar.vue';
       </div>
     </div>
     <div>
-      <div>
-        <div class="flex items-center gap-2 mt-4 -space-x-2">
+      <div class="flex items-center gap-2 mt-4">
+        <div class="flex items-center">
           <Avatar
             v-for="contributor in query.contributors"
             :key="contributor.name"
-            class="w-8 h-8"
+            class="w-6 h-6 bg-green-400/40 rounded-full opacity-80"
           />
         </div>
+
+        <p class="text-slate-400 text-md">
+          <span class="text-green-400 font-semibold">
+            {{ query.contributors.length }}
+          </span>
+          Contributors
+        </p>
       </div>
 
       <div class="flex items-center text-slate-300 gap-1 mt-2">
@@ -141,17 +148,56 @@ import SearchBar from '@/components/SearchBar.vue';
       </div>
     </div>
     <div class="mt-5">
-      <DataTable :value="query.flashcards">
-        <template #header>
-          <div class="flex items-center justify-end">
-            <SearchBar placeholder="Search Cards" />
-          </div>
-        </template>
-        <Column field="question" header="Code"></Column>
-        <Column field="name" header="Name"></Column>
-        <Column field="category" header="Category"></Column>
-        <Column field="quantity" header="Quantity"></Column>
-      </DataTable>
+      <Card class="rounded-md overflow-clip">
+        <DataTable
+          :value="query.flashcards"
+          stripedRows
+          v-model:filters="filters"
+          paginator
+          :rows="10"
+          :globalFilterFields="['question', 'name', 'category']"
+          filter
+          editMode="row"
+          @row-edit-save="onRowEditSave"
+          v-model:selection="selectedCards"
+          contextMenu
+          v-model:contextMenuSelection="selectedCard"
+          @rowContextmenu="onRowContextMenu"
+          lazy
+          scrollable
+          :first="first"
+        >
+          <template #header>
+            <div class="flex items-center justify-end gap-2">
+              <SearchBar placeholder="Search Cards" v-model="filters.global" />
+
+              <Button label="Export" @click="exportCSV($event)">
+                <ArrowRight class="w-5 h-5" />
+                Export
+              </Button>
+            </div>
+          </template>
+
+          <Column selectionMode="multiple" headerStyle="width: 3rem"></Column>
+          <Column field="question" header="Code"></Column>
+          <Column field="name" header="Name"></Column>
+          <Column field="category" header="Category"></Column>
+          <Column field="quantity" header="Quantity"></Column>
+          <ColumnGroup type="footer">
+            <Row>
+              <Column
+                footer="Totals:"
+                :colspan="3"
+                footerStyle="text-align:right"
+              />
+              <Column :footer="10" />
+              <Column :footer="30" />
+            </Row>
+          </ColumnGroup>
+        </DataTable>
+      </Card>
+
+      <ContextMenu ref="cm" :model="menuModel" @hide="selectedCard = null" />
     </div>
   </div>
 </template>
@@ -160,7 +206,8 @@ import DataTable from 'primevue/datatable';
 import Column from 'primevue/column';
 import BreadCrumbs from '@/components/BreadCrumbs.vue';
 import SearchBar from '@/components/SearchBar.vue';
-import { reactive } from 'vue';
+import { reactive, ref } from 'vue';
+import PrimeButton from 'primevue/button';
 import Rating from 'primevue/rating';
 import {
   ArrowLeft,
@@ -175,6 +222,31 @@ import {
   User,
 } from 'lucide-vue-next';
 
+const filters = reactive({
+  global: 'TEST',
+});
+const onRowEditSave = (e) => {
+  console.log(e);
+};
+
+const cm = ref();
+const menuModel = ref([
+  {
+    label: 'View',
+    icon: 'pi pi-fw pi-search',
+    command: () => viewProduct(selectedProduct),
+  },
+  {
+    label: 'Delete',
+    icon: 'pi pi-fw pi-times',
+    command: () => deleteProduct(selectedProduct),
+  },
+]);
+const onRowContextMenu = (event) => {
+  cm.value.show(event.originalEvent);
+};
+const selectedCards = ref([]);
+const selectedCard = ref(null);
 const query = reactive({
   id: 1,
   difficulty: 'easy',
@@ -314,4 +386,5 @@ import DifficultyLevel from '@/components/DifficultyLevel.vue';
 import Badge from '@/components/Badge.vue';
 import Card from '@/components/Card.vue';
 import Avatar from '@/components/Avatar.vue';
+import ContextMenu from 'primevue/contextmenu';
 </script>
