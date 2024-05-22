@@ -16,7 +16,7 @@
           alt="avatar"
           class="w-6 h-6 rounded-full"
         />
-        <span>{{ selected.name }}</span>
+        <span>{{ value.name }}</span>
       </div>
     </template>
     <template #option="{ option }">

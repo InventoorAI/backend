@@ -1,6 +1,5 @@
 <template>
   <!-- drawer component -->
-
   <Sidebar v-model:visible="open" position="right" class="w-full max-w-md">
     <template #header>
       <div class="flex items-center">
@@ -145,9 +144,6 @@
       </form>
     </div>
   </Sidebar>
-  <!-- <TransitionRoot as="template" :show="open"> -->
-  <!--   <Dialog class="relative z-10" @close="open = false"></Dialog> -->
-  <!-- </TransitionRoot> -->
 </template>
 <script setup lang="ts">
 import { reactive } from 'vue';
@@ -155,7 +151,6 @@ import {
   Angry,
   Annoyed,
   Brush,
-  CircleArrowDown,
   FlagIcon,
   FolderPen,
   Frown,
@@ -165,10 +160,8 @@ import {
   Smile,
   SquareAsterisk,
   Trash,
-  X,
 } from 'lucide-vue-next';
 import InputText from 'primevue/inputtext';
-import { Dialog, TransitionRoot } from '@headlessui/vue';
 import { useVModel } from '@vueuse/core';
 import Dropdown from 'primevue/dropdown';
 import FileUpload, { FileUploadUploadEvent } from 'primevue/fileupload';
@@ -187,7 +180,7 @@ const users: App.Models.User[] = [
     password: 'MeinLeben2003+',
   },
 ];
-const newForm = reactive({
+const newForm = reactive<Form>({
   name: {
     type: 'text',
     icon: FolderPen,
@@ -219,12 +212,15 @@ const newForm = reactive({
   },
   cover: {
     type: 'file',
+    value: '',
   },
   contributors: {
     type: 'users',
+    value: [],
   },
   description: {
     type: 'longtext',
+    value: '',
   },
   tags: {
     type: 'multiselect',
@@ -234,33 +230,7 @@ const newForm = reactive({
 const onUpload = (e: FileUploadUploadEvent) => {
   console.log(e);
 };
-const form = reactive({
-  properties: [
-    {
-      key: 'Chapter',
-      type: 'number',
-      value: 1,
-    },
-    {
-      key: 'Code',
-      type: 'text',
-      value: 'CM-101',
-    },
-  ],
-  tags: [],
-});
 
-const onFileChange = (e: Event) => {
-  const target = e.target as HTMLInputElement;
-  const file = target.files?.[0];
-  if (file) {
-    const reader = new FileReader();
-    reader.onload = (e) => {
-      form.coverUrl = e.target?.result as string;
-    };
-    reader.readAsDataURL(file);
-  }
-};
 interface Props {
   open: boolean;
 }

@@ -24,9 +24,7 @@
           <div class="flex justify-between items-center">
             <div class="flex items-center gap-2">
               <!-- Title -->
-              <h3
-                class="text-base font-semibold leading-6 text-lg text-slate-200/80"
-              >
+              <h3 class="font-semibold leading-6 text-lg text-slate-200/80">
                 Computational Methods
               </h3>
               <!-- Tags -->
@@ -69,31 +67,41 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, reactive, computed } from 'vue';
+import { ref, onMounted, reactive } from 'vue';
 import { DataService } from '@/services/DataService';
 
 const drawers = ref<App.Models.Drawer[]>([]);
-import Card from '@/components/Card.vue';
 import Badge from '@/components/Badge.vue';
-import {
-  Check,
-  RectangleEllipsis,
-  RectangleVertical,
-  Repeat,
-} from 'lucide-vue-next';
 
 import BreadCrumbs from '@/components/BreadCrumbs.vue';
 import SearchBar from '@/components/SearchBar.vue';
-import { RouterLink } from 'vue-router';
 import Deck from './partials/Deck.vue';
 import CreateDrawer from './partials/CreateDrawer.vue';
-import { Dialog, TransitionRoot } from '@headlessui/vue';
 const query = reactive({
   search: '',
 });
 
 onMounted(() => {
-  DataService.getDrawers().then((data) => (drawers.value = data.slice(0, 12)));
+  DataService.getDrawers().then(
+    //@ts-ignore
+    (data) => (drawers.value = data.slice(0, 12) as App.Models.Drawer[]),
+  );
 });
 const open = ref(false);
+export interface Property {
+  name: string;
+  value: string;
+  type:
+    | 'text'
+    | 'number'
+    | 'date'
+    | 'time'
+    | 'datetime'
+    | 'color'
+    | 'range'
+    | 'file'
+    | 'checkbox'
+    | 'select';
+}
 </script>
+index.vue

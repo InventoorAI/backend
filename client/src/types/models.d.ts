@@ -16,6 +16,7 @@ declare namespace App.Models {
   }
   export interface Deck {
     name: string;
+    slug: string;
     description: string;
     drawers?: string[];
     flashcards?: string[];
@@ -25,7 +26,8 @@ declare namespace App.Models {
     due: number;
     leech: number;
     suspended: number;
-    owners?: User[];
+    contributors: User[];
+    owner: User;
     coverUrl?: string;
     properties: Property[];
 
@@ -40,7 +42,7 @@ declare namespace App.Models {
     icon: string;
     name: string;
     description: string;
-    tags: string[];
+    tags: Tag[];
     decks?: App.Models.Deck[];
     vaultUrl?: string;
   }

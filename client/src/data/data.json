@@ -16,8 +16,9 @@
     "decks": [
       {
         "id": 1,
+        "slug": "significance-and-error",
         "difficulty": "easy",
-        "imageUrl": "/src/assets/images/computational_methods.jpg",
+        "coverUrl": "/src/assets/images/computational_methods.jpg",
         "total": 10,
         "new": 5,
         "due": 3,
@@ -59,7 +60,6 @@
             "email": "john.doe@gmail.com"
           }
         ],
-        "coverUrl": "https://source.unsplash.com/random/900x700/?maths",
         "name": "Significance and Error",
         "description": "A deck for chapter 3 of the course of Computational methods. This deck contains cards about numerical integration, including techniques like the trapezoidal rule, Simpson's rule, and Romberg algorithm, along with implementation in Octave",
         "tags": [

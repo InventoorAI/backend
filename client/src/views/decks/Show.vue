@@ -1,4 +1,3 @@
-import SearchBar from '@/components/SearchBar.vue';
 <template>
   <div>
     <BreadCrumbs />
@@ -39,7 +38,9 @@ import SearchBar from '@/components/SearchBar.vue';
       </span>
 
       <div class="pl-3 capitalize flex items-center gap-1">
-        <DifficultyLevel :difficulty="query.difficulty" />
+        <DifficultyLevel
+          :difficulty="query.difficulty as App.Models.Deck['difficulty']"
+        />
         <span class="mt-0.5">
           {{ query.difficulty }}
         </span>
@@ -148,72 +149,18 @@ import SearchBar from '@/components/SearchBar.vue';
       </div>
     </div>
     <div class="mt-5">
-      <Card class="rounded-md overflow-clip">
-        <DataTable
-          :value="query.flashcards"
-          stripedRows
-          v-model:filters="filters"
-          paginator
-          :rows="10"
-          :globalFilterFields="['question', 'name', 'category']"
-          filter
-          editMode="row"
-          @row-edit-save="onRowEditSave"
-          v-model:selection="selectedCards"
-          contextMenu
-          v-model:contextMenuSelection="selectedCard"
-          @rowContextmenu="onRowContextMenu"
-          lazy
-          scrollable
-          :first="first"
-        >
-          <template #header>
-            <div class="flex items-center justify-end gap-2">
-              <SearchBar placeholder="Search Cards" v-model="filters.global" />
-
-              <Button label="Export" @click="exportCSV($event)">
-                <ArrowRight class="w-5 h-5" />
-                Export
-              </Button>
-            </div>
-          </template>
-
-          <Column selectionMode="multiple" headerStyle="width: 3rem"></Column>
-          <Column field="question" header="Code"></Column>
-          <Column field="name" header="Name"></Column>
-          <Column field="category" header="Category"></Column>
-          <Column field="quantity" header="Quantity"></Column>
-          <ColumnGroup type="footer">
-            <Row>
-              <Column
-                footer="Totals:"
-                :colspan="3"
-                footerStyle="text-align:right"
-              />
-              <Column :footer="10" />
-              <Column :footer="30" />
-            </Row>
-          </ColumnGroup>
-        </DataTable>
-      </Card>
-
-      <ContextMenu ref="cm" :model="menuModel" @hide="selectedCard = null" />
+      <!-- @vue-ignore -->
+      <CardTable :data="query.flashcards" />
     </div>
   </div>
 </template>
 <script setup lang="ts">
-import DataTable from 'primevue/datatable';
-import Column from 'primevue/column';
 import BreadCrumbs from '@/components/BreadCrumbs.vue';
-import SearchBar from '@/components/SearchBar.vue';
-import { reactive, ref } from 'vue';
-import PrimeButton from 'primevue/button';
+import { reactive } from 'vue';
 import Rating from 'primevue/rating';
 import {
   ArrowLeft,
   ArrowRight,
-  CircleArrowDown,
-  Cog,
   Fullscreen,
   PenBox,
   Play,
@@ -222,31 +169,6 @@ import {
   User,
 } from 'lucide-vue-next';
 
-const filters = reactive({
-  global: 'TEST',
-});
-const onRowEditSave = (e) => {
-  console.log(e);
-};
-
-const cm = ref();
-const menuModel = ref([
-  {
-    label: 'View',
-    icon: 'pi pi-fw pi-search',
-    command: () => viewProduct(selectedProduct),
-  },
-  {
-    label: 'Delete',
-    icon: 'pi pi-fw pi-times',
-    command: () => deleteProduct(selectedProduct),
-  },
-]);
-const onRowContextMenu = (event) => {
-  cm.value.show(event.originalEvent);
-};
-const selectedCards = ref([]);
-const selectedCard = ref(null);
 const query = reactive({
   id: 1,
   difficulty: 'easy',
@@ -380,13 +302,11 @@ const query = reactive({
   ],
 });
 interface Props {}
+defineProps<Props>();
 import Button from '@/components/Button.vue';
-import DifficultyBar from '@/components/DifficultyBar.vue';
 import DifficultyLevel from '@/components/DifficultyLevel.vue';
 import Badge from '@/components/Badge.vue';
 import Card from '@/components/Card.vue';
 import Avatar from '@/components/Avatar.vue';
-import ContextMenu from 'primevue/contextmenu';
-import ProgressBar from 'primevue/progressbar';
-import ReviewProgressBar from '../review/partials/ReviewProgressBar.vue';
+import CardTable from './partials/CardTable.vue';
 </script>

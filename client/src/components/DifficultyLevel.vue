@@ -27,11 +27,11 @@
 import { computed } from 'vue';
 
 interface Props {
-  difficulty: Pick<App.Models.Deck, 'difficulty'>;
+  difficulty: App.Models.Deck['difficulty'];
 }
 
 const props = withDefaults(defineProps<Props>(), {
-  difficulty: () => 'hard',
+  difficulty: 'hard',
 });
 const level = computed(() => {
   switch (props.difficulty) {

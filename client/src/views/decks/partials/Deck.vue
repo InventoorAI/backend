@@ -2,7 +2,7 @@
   <Card>
     <div>
       <div class="relative h-40">
-        <img :src="deck.imageUrl" class="object-cover w-full h-full -mt-1" />
+        <img :src="deck.coverUrl" class="object-cover w-full h-full -mt-1" />
         <div class="w-full bottom-0 absolute px-2 pb-2 flex items-center gap-2">
           <span
             v-for="property in deck.properties"
@@ -35,7 +35,7 @@
       </div>
       <div class="px-2 pb-3">
         <div class="flex items-baseline justify-between w-full pr-2">
-          <RouterLink :to="`/decks/${deck.id}`" class="w-full">
+          <RouterLink :to="`/decks/${deck.slug}`" class="w-full">
             <h1
               class="text-xl mt-2 pl-1 font-medium hover:text-green-400/80 transition"
             >
@@ -66,20 +66,7 @@
           <div class="flex w-16 gap-x-2.5">
             <dt>
               <span class="sr-only">Total comments</span>
-              <!-- <CheckCircleIcon -->
-              <!--   v-if="deck.status === 'resolved'" -->
-              <!--   class="h-6 w-6 text-gray-400" -->
-              <!--   aria-hidden="true" -->
-              <!-- /> -->
-              <!-- <ChatBubbleLeftIcon -->
-              <!--   v-else -->
-              <!--   class="h-6 w-6 text-gray-400" -->
-              <!--   aria-hidden="true" -->
-              <!-- /> -->
             </dt>
-            <dd class="text-sm leading-6 text-gray-900">
-              <!-- {{ discussion.totalComments }} -->
-            </dd>
           </div>
         </dl>
         <p
@@ -94,13 +81,9 @@
 
 <script setup lang="ts">
 import Card from '@/components/Card.vue';
-import { ref, onMounted } from 'vue';
 import { Check, Repeat, RectangleVertical } from 'lucide-vue-next';
-import DifficultyBar from '@/components/DifficultyBar.vue';
 import DifficultyLevel from '@/components/DifficultyLevel.vue';
-import Badge from '@/components/Badge.vue';
 import { RouterLink } from 'vue-router';
-import Spinner from '@/components/Spinner.vue';
 
 interface Props {
   deck: App.Models.Deck;

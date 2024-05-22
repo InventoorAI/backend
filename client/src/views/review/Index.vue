@@ -103,7 +103,6 @@ import { HeartIcon, Cog6ToothIcon, XMarkIcon } from '@heroicons/vue/24/solid';
 import MultipleChoiceCard from './partials/MultipleChoiceCard.vue';
 import EssayCard from './partials/EssayCard.vue';
 import StepsCard from './partials/StepsCard.vue';
-import Calendar from '@/components/Calendar.vue';
 import Card from '@/components/Card.vue';
 import { useReview } from '@/stores/review';
 import { CheckCircleIcon, CheckIcon, ChevronLast } from 'lucide-vue-next';

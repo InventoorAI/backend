@@ -1,4 +1,5 @@
 <template>
+  <!-- @vue-ignore -->
   <ComboBox v-model="selected" :items="items" />
 </template>
 <script setup lang="ts">
@@ -39,7 +40,7 @@ const items: Option[] = [
 ];
 
 interface Emits {
-  (e: 'update:modelValue', value: string): void;
+  (e: 'update:modelValue', value: any): void;
 }
 const props = defineProps<Props>();
 const emits = defineEmits<Emits>();

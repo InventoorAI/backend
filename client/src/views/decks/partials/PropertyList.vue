@@ -9,10 +9,9 @@
 <script setup lang="ts">
 import DataTable from 'primevue/datatable';
 import Column from 'primevue/column';
-import { ref } from 'vue';
 
 interface Props {
   properties: App.Models.Property[];
 }
-const props = defineProps<Props>();
+defineProps<Props>();
 </script>

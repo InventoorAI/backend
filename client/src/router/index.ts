@@ -1,12 +1,9 @@
 import { createRouter, createWebHistory } from 'vue-router'
 
 import HomeView from '@/views/Home.vue'
-import DrawerIndexView from '@/views/drawers/Index.vue'
 import DeckIndexView from '@/views/decks/Index.vue'
-import CardIndexView from '@/views/cards/Index.vue'
 import DeckShowView from '@/views/decks/Show.vue'
 import ReviewView from '@/views/review/Index.vue'
-import ReportsIndexView from '@/views/reports/Index.vue'
 
 const routes = [
   {

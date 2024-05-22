@@ -15,7 +15,7 @@ export const useBreadcrumbs = () => {
     for (let i = 0; i < segments.length; i++) {
       const href = "/" + segments.slice(0, i + 1).join('/');
       const name = segments[i];
-      items.push({ href, name, icon: iconMap[name] });
+      items.push({ href, name, icon: iconMap[name as keyof typeof iconMap] });
     }
     return items
   })

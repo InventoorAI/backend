@@ -28,7 +28,7 @@
       </div>
       <button
         type="button"
-        class="relative -ml-px inline-flex items-center gap-x-1.5 rounded-r-md bg-slate-800 px-3 py-2 text-sm font-semibold ring-offset-2 ring-offset-slate-900 hover:ring-2 ring-green-400/90 hover:bg-slate-700 text-slate-400 transition border-slate-600 shadow-sm text-slate-400"
+        class="relative -ml-px inline-flex items-center gap-x-1.5 rounded-r-md bg-slate-800 px-3 py-2 text-sm font-semibold ring-offset-2 ring-offset-slate-900 hover:ring-2 ring-green-400/90 hover:bg-slate-700 transition border-slate-600 shadow-sm text-slate-400"
       >
         <BarsArrowUpIcon
           class="-ml-0.5 h-5 w-5 text-slate-400"
@@ -48,10 +48,8 @@ import {
   MagnifyingGlassIcon,
   BarsArrowUpIcon,
   ChevronDownIcon,
-  EllipsisVerticalIcon,
 } from '@heroicons/vue/20/solid';
-import { Menu, MenuButton } from '@headlessui/vue';
-import { useVModel, useVModels } from '@vueuse/core';
+import { useVModel } from '@vueuse/core';
 interface Props {
   search: string;
   placeholder: string;

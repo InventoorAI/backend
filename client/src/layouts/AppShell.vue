@@ -1,12 +1,12 @@
 <template>
   <div
-    class="top-0 sticky"
+    class="top-0 sticky z-20"
     :class="{
       '-translate-y-14 hover:translate-y-0 transition ease-in-out ': !open,
     }"
   >
     <CommandPalette v-model:open="palette.open" />
-    <div class="bg-gradient-to-b from-slate-950 to-slate-400/0 pt-6 pb-8">
+    <div class="bg-gradient-to-b from-slate-950 to-slate-900/0 pt-6 pb-4">
       <Disclosure as="nav" v-slot="{ open }">
         <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div class="flex h-16 justify-between">
@@ -40,7 +40,9 @@
                       : 'text-gray-300 hover:bg-slate-800 hover:text-white',
                     'rounded-md px-3 py-2 text-sm font-medium',
                   ]"
-                  :aria-current="item.current ? 'page' : undefined"
+                  :aria-current="
+                    currentRoute.fullPath == item.href ? 'page' : undefined
+                  "
                 >
                   <component :is="item.icon" />
                 </RouterLink>
@@ -107,12 +109,14 @@
               as="a"
               :href="item.href"
               :class="[
-                item.current
+                currentRoute.fullPath === item.href
                   ? 'bg-gray-900 text-white'
                   : 'text-gray-300 hover:bg-gray-700 hover:text-white',
                 'block rounded-md px-3 py-2 text-base font-medium',
               ]"
-              :aria-current="item.current ? 'page' : undefined"
+              :aria-current="
+                currentRoute.fullPath === item.href ? 'page' : undefined
+              "
               >{{ item.name }}</DisclosureButton
             >
           </div>
@@ -168,23 +172,15 @@ import Avatar from '@/components/Avatar.vue';
 import { Disclosure, DisclosureButton, DisclosurePanel } from '@headlessui/vue';
 import Logo from '@/assets/Logo.svg?component';
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/vue/24/outline';
-import { SparklesIcon } from '@heroicons/vue/20/solid';
-import {
-  PanelBottom,
-  WalletCards,
-  Target,
-  Bell,
-  Eclipse,
-} from 'lucide-vue-next';
+import { WalletCards, Target, Bell, Eclipse } from 'lucide-vue-next';
 import { reactive, ref } from 'vue';
 import IconButton from '@/components/IconButton.vue';
 import AvatarDropDown from './AvatarDropDown.vue';
 import Button from '@/components/Button.vue';
 import { useReview } from '@/stores/review';
-import Card from '@/components/Card.vue';
 import CommandPalette from '@/components/CommandPalette.vue';
 import { onKeyStroke } from '@vueuse/core';
-import { useBreadcrumbs } from '@/composables/breadcrumbs';
+import { useAuth } from '@/composables/auth';
 
 const open = ref(true);
 const currentRoute = useRoute();
@@ -195,13 +191,13 @@ const userNavigation = [
   { name: 'Settings', href: '#' },
   { name: 'Sign out', href: '#' },
 ];
-const { start, ongoing, review } = useReview();
+const { start, review } = useReview();
 
 const palette = reactive({ open: false });
 
+const { user } = useAuth();
 onKeyStroke(['cmd', 'k'], (e) => {
   e.preventDefault();
   palette.open = !palette.open;
 });
-const { links } = useBreadcrumbs();
 </script>

@@ -202,7 +202,7 @@ const filteredProjects = computed(() =>
       }),
 );
 
-function onSelect(item) {
+function onSelect(item: any) {
   window.location = item.url;
 }
 interface Props {
