@@ -10,9 +10,6 @@ import Lara from '@/presets/lara'
 import 'katex/dist/katex.min.css'
 
 const app = createApp(App)
-app.use(VueKatex, {
-  globalOptions: {}
-})
 
 app.use(PrimeVue, {
   unstyled: true,

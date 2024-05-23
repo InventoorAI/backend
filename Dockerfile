@@ -1,5 +1,7 @@
+#path > Dockerfile
+
 # Base image
-FROM node:20.9.0-alpine
+FROM node:16-alpine
 
 # Create app directory
 WORKDIR /app
@@ -8,10 +10,12 @@ WORKDIR /app
 COPY package*.json ./
 
 # Install app dependencies
-RUN yarn install
+RUN npm install
 
 # Bundle app source
 COPY . .
+
+ENV NODE_ENV production
 
 # Creates a "dist" folder with the production build
 RUN yarn build
