@@ -109,10 +109,10 @@
       <nav class="mt-8">
         <ul role="list" class="flex flex-col items-center space-y-1">
           <li v-for="item in navigation" :key="item.name">
-            <a
-              :href="item.href"
+            <RouterLink
+              :to="item.href"
               :class="[
-                item.current
+                item.href === currentRoute.path
                   ? 'bg-gray-800 text-white'
                   : 'text-gray-400 hover:text-white hover:bg-gray-800',
                 'group flex gap-x-3 rounded-md p-3 text-sm leading-6 font-semibold',
@@ -124,7 +124,7 @@
                 aria-hidden="true"
               />
               <span class="sr-only">{{ item.name }}</span>
-            </a>
+            </RouterLink>
           </li>
         </ul>
       </nav>
@@ -190,13 +190,16 @@ import {
   UsersIcon,
   XMarkIcon,
 } from '@heroicons/vue/24/outline';
+import { Bot, CogIcon, Folder, Home, PieChart } from 'lucide-vue-next';
+import { RouterLink, useRoute } from 'vue-router';
 
+const currentRoute = useRoute();
 const navigation = [
-  { name: 'Home', href: '#', icon: HomeIcon, current: true },
-  { name: 'Pods', href: '#', icon: UsersIcon, current: false },
-  { name: 'Plots', href: '#', icon: FolderIcon, current: false },
-  { name: 'Settings', href: '#', icon: CalendarIcon, current: false },
-  { name: 'Reports', href: '#', icon: ChartPieIcon, current: false },
+  { name: 'Home', href: '/', icon: Home },
+  { name: 'Pods', href: '/pods', icon: Bot },
+  { name: 'Plots', href: '/plots', icon: Folder },
+  { name: 'Settings', href: '/settings', icon: CogIcon },
+  { name: 'Reports', href: '/reports', icon: PieChart },
 ];
 
 const sidebarOpen = ref(false);

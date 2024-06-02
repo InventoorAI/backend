@@ -4,7 +4,7 @@ import App from './App.vue'
 import PrimeVue from "primevue/config"
 import router from './router'
 //@ts-ignore
-import Lara from '@/presets/lara'
+import Lara from '@/presets'
 import 'katex/dist/katex.min.css'
 import Tres from '@tresjs/core'
 

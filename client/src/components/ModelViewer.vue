@@ -1,12 +1,5 @@
 <script setup lang="ts">
 import { TresCanvas } from '@tresjs/core';
-import {
-  BasicShadowMap,
-  SRGBColorSpace,
-  NoToneMapping,
-  Object3D,
-  Mesh,
-} from 'three';
 
 interface Props {
   clearColor?: string;
@@ -15,8 +8,14 @@ interface Props {
   outputColorSpace?: any;
   toneMapping?: any;
   windowSize?: boolean;
+  modelValue: any;
   powerPrefreference?: 'low-power' | 'high-performance';
 }
+
+interface Emits {
+  (e: 'update:modelValue', value: any): void;
+}
+const emits = defineEmits<Emits>();
 
 const props = withDefaults(defineProps<Props>(), {
   clearColor: '#F78B3D',
@@ -24,6 +23,7 @@ const props = withDefaults(defineProps<Props>(), {
   powerPrefreference: 'low-power',
 });
 
+const hexapod = useVModel(props, 'modelValue', emits);
 const gl = {
   clearColor: props.clearColor,
   shadows: props.shadows,
@@ -35,127 +35,29 @@ const gl = {
 };
 
 import Model from './Model.vue';
-import { onMounted, reactive, ref } from 'vue';
-import Button from 'primevue/button';
 
 import { OrbitControls } from '@tresjs/cientos';
-import { RotateCcw, RotateCw } from 'lucide-vue-next';
-import InputText from 'primevue/inputtext';
-import Slider from 'primevue/slider';
+import { useVModel } from '@vueuse/core';
+import Button from 'primevue/button';
 import InputNumber from 'primevue/inputnumber';
-const rotation = reactive({ x: 0, y: 0, z: 0 });
-const pi = 3.14159265359;
-
-const hexapod = reactive({
-  settings: {
-    z: {
-      min: -1.4,
-      max: 1.4,
-    },
-    x: {
-      min: -1,
-      max: 1.7,
-    },
-    y: {
-      min: -1.5,
-      max: 1.5,
-    },
-    step: 0.1,
-    axes: ['x', 'y', 'z'] as const,
-  },
-
-  legs: {
-    right_top: {
-      rotation: {
-        z: 0,
-        y: 0,
-        x: 0,
-        offset: (3 / 4) * Math.PI,
-      },
-      position: {
-        x: 24,
-        y: 0,
-        z: -35,
-      },
-    },
-
-    right_mid: {
-      rotation: {
-        z: 0,
-        y: 0,
-        x: 0,
-        offset: -Math.PI,
-      },
-      position: {
-        x: 30,
-        y: 0,
-        z: 0,
-      },
-    },
-
-    right_bottom: {
-      rotation: {
-        z: 0,
-        y: 0,
-        x: 0,
-        offset: (4 / 3) * Math.PI,
-      },
-      position: {
-        x: 24,
-        y: 0,
-        z: 35,
-      },
-    },
-
-    left_top: {
-      rotation: {
-        z: 0,
-        y: 0,
-        x: 0,
-        offset: Math.PI / 4,
-      },
-      position: {
-        x: -24,
-        y: 0,
-        z: -35,
-      },
-    },
-
-    left_mid: {
-      rotation: {
-        z: 0,
-        y: 0,
-        x: 0,
-        offset: 0,
-      },
-      position: {
-        x: -30,
-        y: 0,
-        z: 0,
-      },
-    },
-
-    left_bottom: {
-      rotation: {
-        z: 0,
-        y: 0,
-        x: 0,
-        offset: -Math.PI / 4,
-      },
-      position: {
-        x: -24,
-        y: 0,
-        z: 35,
-      },
-    },
-  },
-});
-const legRef = ref<Object3D | null>(null);
 </script>
 
 <template>
-  <div class="rounded-lg overflow-clip">
-    <TresCanvas v-bind="gl">
+  <div class="rounded-lg overflow-clip relative">
+    <div class="absolute top-0 left-0 z-10">
+      <div class="flex items-center gap-2" v-for="(leg, name) in hexapod.legs">
+        <InputNumber
+          v-for="axis in ['x', 'y', 'z'] as const"
+          v-model="hexapod.legs[name].rotation[axis]"
+          :min="hexapod.settings[axis].min"
+          :max="hexapod.settings[axis].max"
+          :step="hexapod.settings.step"
+          showButtons
+          buttonLayout="vertical"
+        />
+      </div>
+    </div>
+    <TresCanvas v-bind="gl" class="absolute top-0">
       <OrbitControls :enableZoom="false" />
       <TresPerspectiveCamera :position="[0, 200, 0]" :look-at="[0, 0, 0]" />
       <Suspense>
