@@ -1271,10 +1271,10 @@ lru-cache@^6.0.0:
   dependencies:
     yallist "^4.0.0"
 
-lucide-vue-next@^0.381.0:
-  version "0.381.0"
-  resolved "https://registry.yarnpkg.com/lucide-vue-next/-/lucide-vue-next-0.381.0.tgz#7ad77b23402fff8f10a9f2ec24bf554aea8620c1"
-  integrity sha512-ktBHW2CwvEj4TPiri51oUGHoVo4naY65nHYOGnaP7G+BQh63Z3i7SBsXZuNMYERnmoBi2UJhX8aoMoaXQ2fOeA==
+lucide-vue-next@^0.382.0:
+  version "0.382.0"
+  resolved "https://registry.yarnpkg.com/lucide-vue-next/-/lucide-vue-next-0.382.0.tgz#68b149598b975cfa7ac9d01f0c4e4bf888329511"
+  integrity sha512-bPmUWCP5w5bUvG7qO3C6MRu7/hXPFhyJTrDDgD3iuN/CBPvFsE6zOmZ8e8pByDDslwhsRE1lNTmcxpihRjE1ag==
 
 lunchboxjs@^0.2.1020:
   version "0.2.1020"

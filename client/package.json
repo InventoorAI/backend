@@ -17,7 +17,7 @@
     "@tresjs/core": "^4.0.0",
     "@vueuse/core": "^10.9.0",
     "katex": "^0.16.10",
-    "lucide-vue-next": "^0.381.0",
+    "lucide-vue-next": "^0.382.0",
     "lunchboxjs": "^0.2.1020",
     "primevue": "^3.52.0",
     "three": "^0.165.0",

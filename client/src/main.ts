@@ -6,7 +6,6 @@ import router from './router'
 //@ts-ignore
 import Lara from '@/presets/lara'
 import 'katex/dist/katex.min.css'
-import { lunchbox } from 'lunchboxjs'
 import Tres from '@tresjs/core'
 
 const app = createApp(App)
