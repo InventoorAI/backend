@@ -4,10 +4,10 @@ import App from './App.vue'
 import PrimeVue from "primevue/config"
 import router from './router'
 //@ts-ignore
-import VueKatex from '@hsorby/vue3-katex'
-//@ts-ignore
 import Lara from '@/presets/lara'
 import 'katex/dist/katex.min.css'
+import { lunchbox } from 'lunchboxjs'
+import Tres from '@tresjs/core'
 
 const app = createApp(App)
 
@@ -16,6 +16,7 @@ app.use(PrimeVue, {
   pt: Lara
 });
 
+app.use(Tres)
 app.use(router)
 
 app.mount('#app')

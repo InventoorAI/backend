@@ -1,6 +1,6 @@
 <template>
-  <div class="text-white">
-    <h1>Home</h1>
-    <p>Welcome to the Home page</p>
-  </div>
+  <RobotControl class="w-[50rem] h-[40rem]" />
 </template>
+<script setup lang="ts">
+import RobotControl from '@/components/ModelViewer.vue';
+</script>

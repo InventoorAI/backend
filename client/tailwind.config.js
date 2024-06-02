@@ -12,7 +12,7 @@ module.exports = {
         'primary-100': 'rgb(var(--primary-100))',
         'primary-200': 'rgb(var(--primary-200))',
         'primary-300': 'rgb(var(--primary-300))',
-        'primary-400': 'rgb(var(--primary-400))',
+        'primary-400': '#F78B3D',
         'primary-500': 'rgb(var(--primary-500))',
         'primary-600': 'rgb(var(--primary-600))',
         'primary-700': 'rgb(var(--primary-700))',

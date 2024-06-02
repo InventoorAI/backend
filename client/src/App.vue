@@ -5,9 +5,9 @@ import AppShell from './layouts/AppShell.vue';
 </script>
 
 <template>
-  <AppShell>
-    <template #main>
-      <RouterView />
-    </template>
-  </AppShell>
+  <!-- <AppShell> -->
+  <!-- <template #main> -->
+  <RouterView />
+  <!-- </template> -->
+  <!-- </AppShell> -->
 </template>
