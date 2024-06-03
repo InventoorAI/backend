@@ -60,11 +60,7 @@
                 class="flex grow flex-col gap-y-5 overflow-y-auto bg-gray-900 px-6 pb-2 ring-1 ring-white/10"
               >
                 <div class="flex h-16 shrink-0 items-center">
-                  <img
-                    class="h-8 w-auto"
-                    src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
-                    alt="Your Company"
-                  />
+                  <Logo class="w-10 h-10" />
                 </div>
                 <nav class="flex flex-1 flex-col">
                   <ul role="list" class="-mx-2 flex-1 space-y-1">
@@ -97,14 +93,10 @@
 
     <!-- Static sidebar for desktop -->
     <div
-      class="hidden lg:fixed lg:inset-y-0 lg:left-0 lg:z-50 lg:block lg:w-20 lg:overflow-y-auto lg:bg-gray-900 lg:pb-4"
+      class="hidden lg:fixed lg:inset-y-0 lg:left-0 lg:z-50 lg:block lg:w-20 overflow-visible lg:bg-gray-900 lg:pb-4 lg:pt-4"
     >
       <div class="flex h-16 shrink-0 items-center justify-center">
-        <img
-          class="h-8 w-auto"
-          src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
-          alt="Your Company"
-        />
+        <Logo class="w-12 h-12 fill-orange-400" />
       </div>
       <nav class="mt-8">
         <ul role="list" class="flex flex-col items-center space-y-1">
@@ -113,7 +105,7 @@
               :to="item.href"
               :class="[
                 item.href === currentRoute.path
-                  ? 'bg-gray-800 text-white'
+                  ? 'bg-gray-800 text-orange-400'
                   : 'text-gray-400 hover:text-white hover:bg-gray-800',
                 'group flex gap-x-3 rounded-md p-3 text-sm leading-6 font-semibold',
               ]"
@@ -146,16 +138,12 @@
       </div>
       <a href="#">
         <span class="sr-only">Your profile</span>
-        <img
-          class="h-8 w-8 rounded-full bg-gray-800"
-          src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-          alt=""
-        />
+        <Logo class="w-10 h-10" />
       </a>
     </div>
 
     <div
-      class="mx-auto flex w-full max-w-7xl items-start gap-x-8 px-4 py-10 sm:px-6 lg:px-8"
+      class="mx-auto flex w-full max-w-7xl items-start gap-x-8 px-4 py-10 sm:px-6 lg:px-8 bg-slate-800"
     >
       <aside class="sticky top-8 hidden w-44 shrink-0 lg:block">
         <slot name="left" />
@@ -174,6 +162,7 @@
 
 <script setup>
 import { ref } from 'vue';
+import Logo from '@/assets/Logo.svg?component';
 import {
   Dialog,
   DialogPanel,
@@ -190,12 +179,19 @@ import {
   UsersIcon,
   XMarkIcon,
 } from '@heroicons/vue/24/outline';
-import { Bot, CogIcon, Folder, Home, PieChart } from 'lucide-vue-next';
+import {
+  Bot,
+  CogIcon,
+  Folder,
+  Home,
+  LayoutGridIcon,
+  PieChart,
+} from 'lucide-vue-next';
 import { RouterLink, useRoute } from 'vue-router';
 
 const currentRoute = useRoute();
 const navigation = [
-  { name: 'Home', href: '/', icon: Home },
+  { name: 'Home', href: '/', icon: LayoutGridIcon },
   { name: 'Pods', href: '/pods', icon: Bot },
   { name: 'Plots', href: '/plots', icon: Folder },
   { name: 'Settings', href: '/settings', icon: CogIcon },

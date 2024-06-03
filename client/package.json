@@ -23,7 +23,8 @@
     "three": "^0.165.0",
     "tweakpane": "^4.0.3",
     "vue": "^3.4.21",
-    "vue-router": "^4.3.2"
+    "vue-router": "^4.3.2",
+    "vue3-google-maps": "^0.0.1"
   },
   "devDependencies": {
     "@types/three": "^0.164.1",

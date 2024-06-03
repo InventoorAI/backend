@@ -1291,6 +1291,11 @@ magic-string@^0.30.10:
   dependencies:
     "@jridgewell/sourcemap-codec" "^1.4.15"
 
+marker-clusterer-plus@^2.1.4:
+  version "2.1.4"
+  resolved "https://registry.yarnpkg.com/marker-clusterer-plus/-/marker-clusterer-plus-2.1.4.tgz#f8eff74d599dab3b7d0e3fed5264ea0e704f5d67"
+  integrity sha512-4WLZnYCkgsUfSC0pftldd0YrLNupSqVIEdxL979f3sXVMBHTUOF3gDa6cEuOk2z8UGyVGcANiNZgvVc333mrHA==
+
 mdn-data@2.0.28:
   version "2.0.28"
   resolved "https://registry.npmjs.org/mdn-data/-/mdn-data-2.0.28.tgz"
@@ -1842,6 +1847,13 @@ vue-tsc@^2.0.6:
     "@volar/typescript" "2.2.0-alpha.10"
     "@vue/language-core" "2.0.14"
     semver "^7.5.4"
+
+vue3-google-maps@^0.0.1:
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/vue3-google-maps/-/vue3-google-maps-0.0.1.tgz#4577aa30151a423b5a2f3f4641f3f595a6f3cfe1"
+  integrity sha512-KiGKqTEohOZBycye+sBVcVWIIBFgaxgPXFM9dxdvfvZDwFk+HEm04XqyomhU+O9pdYrHISP0OpSzuENvL9wylA==
+  dependencies:
+    marker-clusterer-plus "^2.1.4"
 
 vue@^3.2.16:
   version "3.4.27"

@@ -44,19 +44,6 @@ import InputNumber from 'primevue/inputnumber';
 
 <template>
   <div class="rounded-lg overflow-clip relative">
-    <div class="absolute top-0 left-0 z-10">
-      <div class="flex items-center gap-2" v-for="(leg, name) in hexapod.legs">
-        <InputNumber
-          v-for="axis in ['x', 'y', 'z'] as const"
-          v-model="hexapod.legs[name].rotation[axis]"
-          :min="hexapod.settings[axis].min"
-          :max="hexapod.settings[axis].max"
-          :step="hexapod.settings.step"
-          showButtons
-          buttonLayout="vertical"
-        />
-      </div>
-    </div>
     <TresCanvas v-bind="gl" class="absolute top-0">
       <OrbitControls :enableZoom="false" />
       <TresPerspectiveCamera :position="[0, 200, 0]" :look-at="[0, 0, 0]" />

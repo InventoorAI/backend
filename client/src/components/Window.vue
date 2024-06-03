@@ -13,11 +13,11 @@
             <span>{{ title }}</span>
           </div>
           <div class="flex items-center gap-1">
-            <Button outlined size="small">
+            <Button text size="small">
               <CogIcon />
             </Button>
 
-            <Button outlined size="small">
+            <Button text size="small">
               <Ellipsis />
             </Button>
           </div>
@@ -30,15 +30,16 @@
   </Card>
 </template>
 <script setup lang="ts">
-import { CogIcon, Ellipsis } from 'lucide-vue-next';
+import { CogIcon } from 'lucide-vue-next';
 import Button from 'primevue/button';
 import Card from 'primevue/card';
 
 interface Props {
-  icon: any;
-  title: string;
+  icon?: any;
+  title?: string;
 }
-const props = withDefaults(defineProps<Props>(), {
+withDefaults(defineProps<Props>(), {
   title: 'Window',
+  icon: () => CogIcon,
 });
 </script>

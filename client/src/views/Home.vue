@@ -2,27 +2,30 @@
   <AppShell>
     <template #left>
       <div class="flex flex-col gap-2">
-        <div
-          class="rounded-md border w-full border-slate-500 p-2 text-slate-400 px-3"
-        >
-          Location
-          <p>Map</p>
-        </div>
+        <Window> Location </Window>
+        <Window> Insights </Window>
+        <Window> Need Attention </Window>
       </div>
     </template>
     <template #main>
-      <div class="flex-col flex gap-2">
+      <div class="flex-col flex gap-3">
         <RobotControl v-model="hexapod" class="w-full h-[30rem]" />
-        <Window title="Control"> </Window>
+
+        <LegControl v-model="hexapod" class="w-full" />
       </div>
     </template>
     <template #right>
-      <div class="flex flex-col gap-2">
-        <div
-          class="w-full bg-slate-600 rounded-md px-3 p-2 border border-slate-500 h-[40rem]"
-        >
-          AI Chat
-        </div>
+      <div class="flex flex-col gap-3">
+        <Window title="Camera">
+          <CameraView />
+        </Window>
+
+        <Window title="Tank"> </Window>
+        <Window> Performance </Window>
+        <Window title="Temperature">
+          Graph of temperature of: - CPU - Motors Outside Temperature - Humidity
+        </Window>
+        <Window> Terminal </Window>
       </div>
     </template>
   </AppShell>
@@ -31,10 +34,9 @@
 import RobotControl from '@/components/ModelViewer.vue';
 import Window from '@/components/Window.vue';
 import AppShell from '@/layouts/AppShell.vue';
-import { Cog, CogIcon, Ellipsis, Gamepad } from 'lucide-vue-next';
-import Button from 'primevue/button';
-import Card from 'primevue/card';
-import { reactive, ref } from 'vue';
+import { reactive } from 'vue';
+import CameraView from '@/components/CameraView.vue';
+import LegControl from './partials/LegControl.vue';
 const hexapod = reactive({
   settings: {
     z: {
@@ -48,6 +50,11 @@ const hexapod = reactive({
     y: {
       min: -1.5,
       max: 1.5,
+    },
+    speed: {
+      current: 1,
+      min: 1,
+      max: 100,
     },
     step: 0.1,
     axes: ['x', 'y', 'z'] as const,
