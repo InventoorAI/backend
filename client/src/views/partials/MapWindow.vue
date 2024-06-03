@@ -1,6 +1,4 @@
-<script setup>
-import { GoogleMap, Marker } from 'vue3-google-maps';
-
+<script setup lang="ts">
 const center = { lat: 40.689247, lng: -74.044502 };
 </script>
 
@@ -11,6 +9,5 @@ const center = { lat: 40.689247, lng: -74.044502 };
     :center="center"
     :zoom="15"
   >
-    <Marker :options="{ position: center }" />
   </GoogleMap>
 </template>

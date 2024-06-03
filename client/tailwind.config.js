@@ -34,8 +34,10 @@ module.exports = {
       },
     },
     fontFamily: {
-      sans: ['Karla'],
+      sans: ['Chivo Mono'],
     },
   },
   plugins: [require('@tailwindcss/forms')],
 };
+// <uniquifier>: Use a unique and descriptive class name
+// <weight>: Use a value from 100 to 900

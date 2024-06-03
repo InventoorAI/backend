@@ -2,8 +2,8 @@
   <AppShell>
     <template #left>
       <div class="flex flex-col gap-2">
-        <Window> Location </Window>
-        <Window> Insights </Window>
+        <MapWindow />
+        <Window :icon="Lightbulb"> Insights </Window>
         <Window> Need Attention </Window>
       </div>
     </template>
@@ -33,10 +33,12 @@
 <script setup lang="ts">
 import RobotControl from '@/components/ModelViewer.vue';
 import Window from '@/components/Window.vue';
+import { Lightbulb } from 'lucide-vue-next';
 import AppShell from '@/layouts/AppShell.vue';
 import { reactive } from 'vue';
 import CameraView from '@/components/CameraView.vue';
 import LegControl from './partials/LegControl.vue';
+import MapWindow from './partials/MapWindow.vue';
 const hexapod = reactive({
   settings: {
     z: {
