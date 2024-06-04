@@ -39,7 +39,6 @@
 </template>
 <script setup lang="ts">
 import { DockIcon, EllipsisIcon, ChevronRightIcon } from 'lucide-vue-next';
-import Button from 'primevue/button';
 import Card from 'primevue/card';
 
 import { ref } from 'vue';

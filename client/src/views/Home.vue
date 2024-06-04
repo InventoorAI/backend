@@ -16,29 +16,63 @@
     </template>
     <template #right>
       <div class="flex flex-col gap-3">
-        <Window title="Camera">
+        <Window title="Camera" :icon="Webcam">
           <CameraView />
         </Window>
 
-        <Window title="Tank"> </Window>
-        <Window> Performance </Window>
-        <Window title="Temperature">
-          Graph of temperature of: - CPU - Motors Outside Temperature - Humidity
+        <TankWindow />
+        <Window title="System Loads">
+          <div class="border-b p-1 flex items-center">Test</div>
+
+          <Doughnut
+            id="doughtnut-chart"
+            :data="{
+              labels: ['January', 'February', 'March'],
+              datasets: [{ data: [40, 20, 12] }],
+            }"
+          />
+          <div class="border-b p-1">Test</div>
         </Window>
-        <Window> Terminal </Window>
+        <Window title="Temperature"> </Window>
+        <TerminalWindow />
       </div>
     </template>
   </AppShell>
 </template>
 <script setup lang="ts">
 import RobotControl from '@/components/ModelViewer.vue';
+import { Bar, Doughnut } from 'vue-chartjs';
 import Window from '@/components/Window.vue';
-import { Lightbulb } from 'lucide-vue-next';
+import { Webcam, Lightbulb } from 'lucide-vue-next';
 import AppShell from '@/layouts/AppShell.vue';
 import { reactive } from 'vue';
 import CameraView from '@/components/CameraView.vue';
 import LegControl from './partials/LegControl.vue';
 import MapWindow from './partials/MapWindow.vue';
+import TerminalWindow from './partials/TerminalWindow.vue';
+import TankWindow from './partials/TankWindow.vue';
+
+import {
+  Chart as ChartJS,
+  Title,
+  Tooltip,
+  Legend,
+  BarElement,
+  CategoryScale,
+  LinearScale,
+  ArcElement,
+} from 'chart.js';
+
+ChartJS.register(
+  Title,
+  Tooltip,
+  Legend,
+  BarElement,
+  ArcElement,
+  CategoryScale,
+  LinearScale,
+);
+
 const hexapod = reactive({
   settings: {
     z: {

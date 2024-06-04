@@ -1,12 +1,4 @@
 <template>
-  <!--
-    This example requires updating your template:
-
-    ```
-    <html class="h-full bg-white">
-    <body class="h-full">
-    ```
-  -->
   <div>
     <TransitionRoot as="template" :show="sidebarOpen">
       <Dialog class="relative z-50 lg:hidden" @close="sidebarOpen = false">
@@ -68,7 +60,7 @@
                       <a
                         :href="item.href"
                         :class="[
-                          item.current
+                          item.href === currentRoute.path
                             ? 'bg-gray-800 text-white'
                             : 'text-gray-400 hover:text-white hover:bg-gray-800',
                           'group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold',
@@ -160,7 +152,7 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { ref } from 'vue';
 import Logo from '@/assets/Logo.svg?component';
 import {
@@ -169,21 +161,11 @@ import {
   TransitionChild,
   TransitionRoot,
 } from '@headlessui/vue';
-import {
-  Bars3Icon,
-  CalendarIcon,
-  ChartPieIcon,
-  DocumentDuplicateIcon,
-  FolderIcon,
-  HomeIcon,
-  UsersIcon,
-  XMarkIcon,
-} from '@heroicons/vue/24/outline';
+import { Bars3Icon, XMarkIcon } from '@heroicons/vue/24/outline';
 import {
   Bot,
   CogIcon,
   Folder,
-  Home,
   LayoutGridIcon,
   PieChart,
 } from 'lucide-vue-next';

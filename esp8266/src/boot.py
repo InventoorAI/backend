@@ -44,7 +44,6 @@ def on_connect():
     client.subscribe("hexapod1")
     print("Subscribed to hexapod1")
 
-
 client = MQTTClient("hexapod1", "192.168.100.14", port=1883)
 
 def connect_to_mqtt():

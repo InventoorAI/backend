@@ -13,16 +13,27 @@ services:
   #   volumes:
   #     - mongodb_data_container:/data/db
 
-  nestapi:
+
+  mongodb:
+    container_name: mongodb
+    image: mongo:latest
+    restart: always
+    env_file:
+      - .env
+    ports:
+      - 27017:27017
+    volumes:
+      - mongodb_data_container:/data/db
+
+  api:
     container_name: nestapi
     build: .
-    command: npm run start:prod
-    # Uncomment below lines only if you are developing. 
     volumes:
       - .:/app
       - /app/node_modules
-    networks:
-      - mqtttest
+    ports:
+      - ${APP_PORT}:${APP_PORT}
+    command: yarn start:dev
     environment:
       - env
       - connectUrl
@@ -30,28 +41,19 @@ services:
       - username
       - password
       - reconnectPeriod
-
-    ports:
-      - ${APP_PORT}:${APP_PORT}
     env_file:
       - .env
-    # depends_on:
-    #   - mongodb
-    restart: always
+    depends_on:
+      - mongodb
+      - mqtt-broker
   
   mqtt-broker:
-    image: eclipse-mosquitto
+    image: eclipse-mosquitto:latest
     container_name: mqtt-broker
     ports:
       - "1883:1883"
-    networks:
-      - mqtttest
     volumes:
       - ./mosquitto.conf:/mosquitto/config/mosquitto.conf
 
-networks:
-  mqtttest:
-    name: mqtttest
 volumes:
-  data: ~
-  # mongodb_data_container:
+  mongodb_data_container:

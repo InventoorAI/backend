@@ -1,13 +1,40 @@
 // src/app.module.ts
-
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { MqttModule } from './mqtt/mqtt.module';
+import { ServeStaticModule } from '@nestjs/serve-static';
+import { join } from 'path';
+import { ConfigModule } from '@nestjs/config';
+import { HexapodsModule } from './hexapods/hexapods.module';
+import { ClientsModule, Transport } from '@nestjs/microservices';
+import { MongooseModule } from '@nestjs/mongoose';
 
 @Module({
   imports: [
-    MqttModule,
+
+    ConfigModule.forRoot({
+      expandVariables: true,
+    }),
+    MongooseModule.forRoot('mongodb://mongodb/hex'),
+    HexapodsModule,
+
+    ServeStaticModule.forRoot({ // New
+      renderPath: '/',
+      rootPath: join(__dirname, '..', 'client'),
+    }), // New
+
+    ServeStaticModule.forRoot({ // New 
+      renderPath: '/storage', // const name = new type(arguments);
+      rootPath: 'storage', // New
+      serveRoot: '/storage', // New
+    }),
+
+    // ClientsModule.register([
+    //   {
+    //     name: 'mqtt-client',
+    //     transport: Transport.MQTT,
+    //   },
+    // ]),
   ],
   controllers: [AppController],
   providers: [AppService],

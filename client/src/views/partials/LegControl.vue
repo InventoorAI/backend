@@ -72,9 +72,7 @@ import { CircleGauge, Minus, Plus } from 'lucide-vue-next';
 import Axis1Icon from '@/assets/images/Axis1.svg?component';
 import Axis2Icon from '@/assets/images/Axis2.svg?component';
 import Axis3Icon from '@/assets/images/Axis3.svg?component';
-import { ref } from 'vue';
 import { useVModel } from '@vueuse/core';
-import { emit } from 'process';
 import InputNumber from 'primevue/inputnumber';
 import Window from '@/components/Window.vue';
 interface Props {

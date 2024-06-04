@@ -1,4 +1,5 @@
 <script setup lang="ts">
+//@ts-ignore
 import { useGLTF } from '@tresjs/cientos';
 import { Object3D } from 'three';
 import { ref } from 'vue';
@@ -20,7 +21,7 @@ const emit = defineEmits<Emits>();
 
 const objectRef = ref<Object3D | null>(null);
 
-const { scene: model, animations } = await useGLTF(props.src);
+const { scene: model } = await useGLTF(props.src);
 </script>
 
 <template>

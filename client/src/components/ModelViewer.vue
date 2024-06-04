@@ -38,8 +38,6 @@ import Model from './Model.vue';
 
 import { OrbitControls } from '@tresjs/cientos';
 import { useVModel } from '@vueuse/core';
-import Button from 'primevue/button';
-import InputNumber from 'primevue/inputnumber';
 </script>
 
 <template>
