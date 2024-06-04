@@ -3,7 +3,7 @@
     <div class="">
       <div class="left-0 z-10 grid grid-cols-2 gap-[1px] bg-slate-500/50">
         <div
-          class="flex items-center gap-2 p-8 justify-center bg-slate-900"
+          class="flex items-center gap-2 p-6 justify-center bg-slate-900"
           v-for="(_, name, idx) in hexapod.legs"
         >
           <div
@@ -32,37 +32,43 @@
         </div>
       </div>
 
-      <div class="flex flex-col gap-3 border-t border-slate-700/80 pt-5">
-        <div class="flex items-center justify-between">
-          <div class="flex items-center gap-2">
-            <CircleGauge />
-            <h1>Speed Factor</h1>
-          </div>
-          <InputNumber
-            v-model="hexapod.settings.speed.current"
-            :min="hexapod.settings.speed.min"
-            :max="hexapod.settings.speed.max"
-            suffix="%"
-            :step="1"
-          />
-        </div>
-        <div class="flex items-center gap-4">
-          <button @click="hexapod.settings.speed.current -= 1">
-            <Minus />
-          </button>
-          <Slider
-            class="w-full mt-1"
-            v-model="hexapod.settings.speed.current"
-            :min="hexapod.settings.speed.min"
-            :max="hexapod.settings.speed.max"
-            :step="1"
-            label="X"
-          />
+      <div class="flex flex-col gap-3 border-t border-slate-700/80 p-5">
+        <Fieldset>
+          <template #legend>
+            <div class="flex items-center justify-between gap-4">
+              <div class="flex items-center gap-2 px-2">
+                <CircleGauge class="w-4 text-orange-400" />
+                <span class="font-medium">Speed Factor</span>
+              </div>
 
-          <button @click="hexapod.settings.speed.current += 1">
-            <Plus />
-          </button>
-        </div>
+              <InputNumber
+                v-model="hexapod.settings.speed.current"
+                :min="hexapod.settings.speed.min"
+                :max="hexapod.settings.speed.max"
+                suffix="%"
+                :step="1"
+              />
+            </div>
+          </template>
+
+          <div class="flex items-center gap-4">
+            <button @click="hexapod.settings.speed.current -= 1">
+              <Minus />
+            </button>
+            <Slider
+              class="w-full mt-1"
+              v-model="hexapod.settings.speed.current"
+              :min="hexapod.settings.speed.min"
+              :max="hexapod.settings.speed.max"
+              :step="1"
+              label="X"
+            />
+
+            <button @click="hexapod.settings.speed.current += 1">
+              <Plus />
+            </button>
+          </div>
+        </Fieldset>
       </div>
     </div>
   </Window>
@@ -75,6 +81,8 @@ import Axis3Icon from '@/assets/images/Axis3.svg?component';
 import { useVModel } from '@vueuse/core';
 import InputNumber from 'primevue/inputnumber';
 import Window from '@/components/Window.vue';
+import Fieldset from 'primevue/fieldset';
+import Slider from 'primevue/slider';
 interface Props {
   modelValue: any;
 }

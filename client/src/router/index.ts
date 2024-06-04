@@ -1,9 +1,10 @@
 import { createRouter, createWebHistory } from 'vue-router'
 
-import PodsIndex from '@/views/pods/Index.vue'
 import HomeView from '@/views/Home.vue'
+import PodsIndex from '@/views/pods/Index.vue'
 import PlotsIndex from '@/views/plots/Index.vue'
 import ReportsIndex from '@/views/reports/Index.vue'
+import PodsShow from '@/views/pods/Show.vue'
 import SettingsIndex from '@/views/settings/Index.vue'
 
 const routes = [
@@ -18,6 +19,7 @@ const routes = [
     path: '/pods',
     component: PodsIndex,
   },
+  { path: '/pods/:id', component: PodsShow, props: true },
   {
     path: '/plots',
     component: PlotsIndex,
