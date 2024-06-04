@@ -1,11 +1,13 @@
 import { Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
 import { HexapodsService } from './hexapods.service';
-import { Hexapod } from './entities/hexapod.entity';
 import { Body } from '@nestjs/common';
-import { CreateHexapodDto } from './dto/create-hexapod';
 import { UpdateHexapodDto } from './dto/update-hexapod.dto';
+import { ApiTags } from '@nestjs/swagger';
+import { Hexapod } from './schemas/hexapod.schema';
+import { CreateHexapodDto } from './dto/create-hexapod.dto';
 
-@Controller()
+@ApiTags('hexapods')
+@Controller('hexapods')
 export class HexapodsController {
   constructor(private readonly hexapodsService: HexapodsService) { }
 

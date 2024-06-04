@@ -10,11 +10,8 @@ export class HexapodsSeeder implements Seeder {
   constructor(@InjectModel(Hexapod.name) private readonly user: Model<Hexapod>) { }
 
   async seed(): Promise<any> {
-    // Generate 10 users.
-    const users = DataFactory.createForClass(Hexapod).generate(10);
-
-
-    return this.user.insertMany(users);
+    const hexapods = DataFactory.createForClass(Hexapod).generate(1);
+    return this.user.insertMany(hexapods);
   }
 
   async drop(): Promise<any> {

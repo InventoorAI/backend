@@ -2,8 +2,8 @@ import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { Hexapod } from './schemas/hexapod.schema';
-import { CreateHexapodDto } from './dto/create-hexapod';
 import { UpdateHexapodDto } from './dto/update-hexapod.dto';
+import { CreateHexapodDto } from './dto/create-hexapod.dto';
 
 @Injectable()
 export class HexapodsService {

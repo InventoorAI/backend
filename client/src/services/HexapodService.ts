@@ -6,5 +6,5 @@ export const HexapodService = {
   getHexapods: () => instance.get('/hexapods'),
   getHexapod: (id: string) => instance.get(`/hexapods/${id}`),
   createHexapod: (hexapod: CreateHexapodDto) => instance.post('/hexapods', hexapod),
-  updateHexapod: (hexapod: UpdateHexapodDto) => instance.put(`/hexapods/${hexapod.id}`, hexapod),
+  updateHexapod: (id: string, data: UpdateHexapodDto) => instance.put(`/hexapods/${id}`, data),
 }

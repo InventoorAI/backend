@@ -15,7 +15,7 @@ import { MongooseModule } from '@nestjs/mongoose';
     ConfigModule.forRoot({
       expandVariables: true,
     }),
-    MongooseModule.forRoot('mongodb://mongodb/hex'),
+    MongooseModule.forRoot(process.env.MONGODB_URL),
     HexapodsModule,
 
     ServeStaticModule.forRoot({ // New

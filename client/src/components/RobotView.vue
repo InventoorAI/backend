@@ -9,6 +9,9 @@ interface Props {
   toneMapping?: any;
   windowSize?: boolean;
   modelValue: any;
+  enableZoom?: boolean;
+  enablePan?: boolean;
+  enableRotate?: boolean;
   powerPrefreference?: 'low-power' | 'high-performance';
 }
 
@@ -21,6 +24,9 @@ const props = withDefaults(defineProps<Props>(), {
   clearColor: '#F78B3D',
   windowSize: false,
   powerPrefreference: 'low-power',
+  enableRotate: true,
+  enablePan: false,
+  enableZoom: false,
 });
 
 const hexapod = useVModel(props, 'modelValue', emits);
@@ -43,7 +49,11 @@ import { useVModel } from '@vueuse/core';
 <template>
   <div class="rounded-lg overflow-clip relative">
     <TresCanvas v-bind="gl" class="absolute top-0">
-      <OrbitControls :enableZoom="false" />
+      <OrbitControls
+        :enableZoom="enableZoom"
+        :enablePan="enablePan"
+        :enableRotate="enableRotate"
+      />
       <TresPerspectiveCamera :position="[0, 200, 0]" :look-at="[0, 0, 0]" />
       <Suspense>
         <Model
