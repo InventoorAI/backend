@@ -14,9 +14,6 @@ export class Hexapod {
   @Prop({ required: true })
   name: string;
 
-  @Prop({ required: true })
-  _id: ObjectId;
-
   @Prop({ required: true, type: Object, default: () => new HexapodSettings() })
   settings: HexapodSettings;
 
@@ -25,8 +22,6 @@ export class Hexapod {
 
   @Prop({ required: true, default: [], type: Array })
   tags: Tag[];
-
-
 }
 
 export const HexapodSchema = SchemaFactory.createForClass(Hexapod)

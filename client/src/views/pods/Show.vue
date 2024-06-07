@@ -53,23 +53,33 @@ import RobotControl from '@/components/RobotView.vue';
 import Window from '@/components/Window.vue';
 import { Lightbulb } from 'lucide-vue-next';
 import AppShell from '@/layouts/AppShell.vue';
-import { onMounted, ref } from 'vue';
+import { onMounted, ref, watch } from 'vue';
 import CameraWindow from '@/components/CameraWindow.vue';
 
-import { Hexapod } from '@backend/hexapods/schemas/hexapod.schema';
+import {
+  Hexapod,
+  HexapodDocument,
+} from '@backend/hexapods/schemas/hexapod.schema';
 import { HexapodService } from '@/services/HexapodService';
 import Skeleton from 'primevue/skeleton';
 import PaneLayout from '@/layouts/PaneLayout.vue';
 import ControlWindow from './partials/ControlWindow.vue';
+import { instance } from '@/services/instance';
+import { watchDeep } from '@vueuse/core';
 
-const hexapod = ref<Hexapod | null>(null);
+const hexapod = ref<HexapodDocument | null>(null);
 const isLoading = ref(true);
 onMounted(() => {
   HexapodService.getHexapod('665ebcca6b30c4e11cbefd76').then((res) => {
     hexapod.value = res.data;
     setTimeout(() => {
       isLoading.value = false;
-    }, 1000);
+    }, 500);
   });
+});
+
+watchDeep(hexapod, (newVal) => {
+  if (!newVal) return;
+  instance.put(`/hexapods/${newVal._id}`, newVal);
 });
 </script>

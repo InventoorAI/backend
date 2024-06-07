@@ -7,6 +7,8 @@ import machine
 import pca9685
 import network, utime
 from servo import Servos
+import json
+import time
 from mqtt import MQTTClient
 
 i2c = machine.I2C(scl=machine.Pin(5), sda=machine.Pin(4))
@@ -14,6 +16,13 @@ left_servos = Servos(i2c, address=0x40, degrees=180)
 right_servos = Servos(i2c, address=0x41, degrees=180)
 
 
+
+topic_sub = b'to-hexapod'
+topic_pub = b'from-hexapod'
+
+last_message = 0
+message_interval = 5
+counter = 0
 # Replace the following with your WIFI Credentials
 SSID = "Solistice-14"
 SSID_PASSWORD = "BALD1234"
@@ -34,10 +43,8 @@ def connect_to_wifi():
 def on_message(topic, msg):
     print("Received message: ", msg)
     print("Topic: ", topic)
-    if msg == b"M1 0 20":
-        left_servos.position(15, 20)
-    else:
-        print("Invalid message")
+    hexapod_state = json.loads(msg)
+    print(hexapod_state.get("data").get("legs").get("right_top"))
 
 def on_connect():
     print("Connected to MQTT broker")
