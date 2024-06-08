@@ -16,7 +16,9 @@ export class WebcamsService {
 
 
   async downloadSnapshot(imageUrl: string, imagePath: string) {
-    const response = await this.httpService.get(imageUrl, { responseType: 'stream' }).toPromise();
+    const response = await this.httpService
+      .get(imageUrl, { responseType: 'stream' })
+      .toPromise();
 
     const stream = createWriteStream(join(process.cwd(), imagePath));
 
@@ -45,21 +47,20 @@ export class WebcamsService {
   async processImage(imagePath: string, serverUrl: string) {
 
     try {
-
       const formData = new FormData();
       const filePath = 'src/storage/snapshot.jpg'
       const fileStream = fs.createReadStream(filePath);
       const fileBlob = await this.streamToBlob(fileStream);
 
       formData.append('file', fileBlob);
-      const response = await fetch('http:/192.168.145.49:8000/count', {
+      const response = await fetch(process.env.YOLO_MODEL_PROCESS_URL, {
         method: 'POST',
         body: formData,
       })
       const data = await response.json()
-      const base64 = 'data:image/jpeg;base64,' + data.base64
+      const base64 = process.env.BASE64_IMAGE_PREFIX + data.base64
 
-      const path = converBase64ToImage(base64, 'src/storage/processed.jpg') //returns path /public
+      converBase64ToImage(base64, 'src/storage/processed.jpg')
 
 
       this.itemsService.deleteAll();
