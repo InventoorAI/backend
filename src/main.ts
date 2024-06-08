@@ -49,13 +49,6 @@ async function bootstrap() {
 
   app.useWebSocketAdapter(new IoAdapter(app));
 
-  // Get the ImageDownloaderService instance
-  const webcamService = app.get(WebcamsService);
-
-  // Define the interval function
-
-  // setInterval(intervalFunction, 1000);
-
   const config = new DocumentBuilder()
     .setTitle('Inventoor API')
     .setDescription('The Inventoor API description')

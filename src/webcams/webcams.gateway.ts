@@ -21,7 +21,7 @@ export class WebcamsGateway
   constructor(private readonly httpService: HttpService,
     private readonly webcamService: WebcamsService) {
   }
-  private intervalId: NodeJS.Timeout;
+  private intervalIds: NodeJS.Timeout[] = [];
   @WebSocketServer() io: Server;
 
   afterInit() {
@@ -34,22 +34,29 @@ export class WebcamsGateway
     this.logger.debug(`Client id: ${client.id} connected`);
     this.logger.debug(`Number of connected clients: ${sockets.size}`);
 
-    this.intervalId = setInterval(() => {
-      try {
-        const snapshotUrl = "http://raspberrypi.local/webcam/snapshot";
-        const imagePath = "src/storage/snapshot.jpg";
-        this.webcamService.downloadSnapshot(snapshotUrl, imagePath);
-        const imageData = fs.readFileSync(imagePath);
-        this.server.emit('mjpeg-stream', imageData);
-        this.webcamService.processImage(imagePath, this.mjpegStreamUrl)
-      } catch (err) {
-        console.error(err);
-      }
-    }, 400)
+    this.intervalIds.push(
+      setInterval(() => {
+        try {
+          const snapshotUrl = "http://raspberrypi.local/webcam/snapshot";
+          const imagePath = "src/storage/snapshot.jpg";
+          this.webcamService.downloadSnapshot(snapshotUrl, imagePath);
+          this.webcamService.processImage(imagePath, this.mjpegStreamUrl)
+
+
+          const imageData = fs.readFileSync('src/storage/processed.jpg');
+          this.server.emit('mjpeg-stream', imageData);
+        } catch (err) {
+          console.error('error');
+        }
+      }, 400)
+    )
   }
 
   handleDisconnect(client: any) {
-    clearInterval(this.intervalId)
+    this.intervalIds.forEach((id) => {
+      clearInterval(id);
+
+    })
     this.logger.log(`Cliend id:${client.id} disconnected`);
   }
 

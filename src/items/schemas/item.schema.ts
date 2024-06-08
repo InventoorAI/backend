@@ -11,28 +11,28 @@ export type ItemDocument = Item & Document;
 
 export class Item {
   @Factory(() => 'item')
-  @Prop({ required: true })
+  @Prop({ required: true, default: 'item' })
   name: string;
 
   @Factory((faker) => faker.lorem.sentence())
-  @Prop({ required: true })
+  @Prop({ required: true, default: 'item description' })
   description: string;
 
   @Factory((faker) => faker.number.int())
-  @Prop({ required: true })
+  @Prop({ required: true, default: 30 })
   width: number;
 
   @Factory((faker) => faker.number.int())
-  @Prop({ required: true })
+  @Prop({ required: true, default: 30 })
   height: number;
 
   @Factory((faker) => faker.number.int())
-  @Prop({ required: true })
+  @Prop({ required: true, default: 20 })
   depth: number;
 
 
   @Factory((faker) => faker.number.int())
-  @Prop({ required: true })
+  @Prop({ required: true, default: 0 })
   quantity: number;
 
 

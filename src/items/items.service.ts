@@ -42,4 +42,13 @@ export class ItemsService {
   async getHumidityData(): Promise<number[]> {
     return [1, 2, 3, 4, 5];
   }
+
+  async deleteAll() {
+    return await this.itemModel.deleteMany();
+  }
+
+  async createMany(items: CreateItemDto[]): Promise<Item[]> {
+    console.log(items)
+    return await this.itemModel.insertMany(items)
+  }
 }
