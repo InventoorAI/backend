@@ -1,8 +1,11 @@
 import { HttpService } from '@nestjs/axios';
+//@ts-ignore
+import { streamToBlob } from 'stream-to-blob'
 import { Injectable } from '@nestjs/common';
 import { createReadStream, createWriteStream } from 'fs';
 import { join } from 'path';
 import { Readable } from 'stream';
+import * as fs from 'fs'
 import { promisify } from 'util';
 
 @Injectable()
@@ -28,23 +31,34 @@ export class WebcamsService {
   }
 
 
-  async sendImageFromStorage(imagePath: string, serverUrl: string) {
+  private streamToBlob(stream: Readable): Promise<Blob> {
+    return new Promise((resolve, reject) => {
+      const chunks: Buffer[] = [];
+
+      stream.on('data', (chunk) => chunks.push(chunk));
+      stream.once('end', () => resolve(new Blob(chunks)));
+      stream.once('error', reject);
+    });
+  }
+  async processImage(imagePath: string, serverUrl: string) {
+
     try {
-      // Create a readable stream from the local image file
-      const readStream = createReadStream(join(process.cwd(), imagePath));
 
-      // Send the image data to the server
-      await this.httpService
-        .post(serverUrl, readStream, {
-          headers: {
-            'Content-Type': 'image/jpeg', // Set the appropriate content type
-          },
-        })
-        .toPromise();
+      const formData = new FormData();
+      const filePath = 'src/storage/snapshot.jpg'
+      const fileStream = fs.createReadStream(filePath);
+      const fileBlob = await this.streamToBlob(fileStream);
 
-      return 'Image sent successfully';
-    } catch (err) {
-      throw err;
+      formData.append('file', fileBlob);
+      const response = await fetch('http:/192.168.145.49:8000/count', {
+        method: 'POST',
+        body: formData,
+      })
+      const data = await response.json()
+      console.log(data)
+    } catch (exception) {
+      console.log(exception)
+
     }
   }
 }

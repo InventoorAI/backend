@@ -53,20 +53,6 @@ async function bootstrap() {
   const webcamService = app.get(WebcamsService);
 
   // Define the interval function
-  const intervalFunction = async () => {
-    const imageUrl = 'http://192.168.31.60/webcam/snapshot';
-    const imagePath = 'src/storage/snapshot.jpg';
-    const serverUrl = 'http://192.168.31.110:8000/img';
-
-    try {
-      const result = await webcamService.downloadSnapshot(imageUrl, imagePath);
-      console.log(result);
-      const sendResult = await webcamService.sendImageFromStorage(imagePath, serverUrl);
-      console.log(sendResult);
-    } catch (err) {
-      console.error(err);
-    }
-  };
 
   // setInterval(intervalFunction, 1000);
 
