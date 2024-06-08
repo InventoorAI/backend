@@ -4,6 +4,7 @@ import { UsersController } from './users.controller';
 import { MongooseModule } from '@nestjs/mongoose';
 import { UserSchema } from './schemas/user.schema';
 import { ClientsModule, Transport } from '@nestjs/microservices';
+import { ChatbotService } from 'src/chatbot/chatbot.service';
 
 @Module({
   imports: [
@@ -12,10 +13,8 @@ import { ClientsModule, Transport } from '@nestjs/microservices';
       {
         name: 'MQTT_CLIENT',
         transport: Transport.MQTT,
-
         options: {
           url: process.env.MQTT_URL || 'mqtt://mqtt-broker:1883',
-
         }
       },
     ]),
@@ -23,6 +22,6 @@ import { ClientsModule, Transport } from '@nestjs/microservices';
   controllers: [
     UsersController,
   ],
-  providers: [UsersService],
+  providers: [UsersService, ChatbotService],
 })
 export class UsersModule { }

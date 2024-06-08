@@ -35,20 +35,20 @@ export class WebcamsGateway
     this.logger.debug(`Number of connected clients: ${sockets.size}`);
 
     this.intervalIds.push(
-      setInterval(() => {
-        try {
-          const snapshotUrl = "http://raspberrypi.local/webcam/snapshot";
-          const imagePath = "src/storage/snapshot.jpg";
-          this.webcamService.downloadSnapshot(snapshotUrl, imagePath);
-          this.webcamService.processImage(imagePath, this.mjpegStreamUrl)
-
-
-          const imageData = fs.readFileSync('src/storage/processed.jpg');
-          this.server.emit('mjpeg-stream', imageData);
-        } catch (err) {
-          console.error('error');
-        }
-      }, 400)
+      // setInterval(() => {
+      //   try {
+      //     const snapshotUrl = "http://raspberrypi.local/webcam/snapshot";
+      //     const imagePath = "src/storage/snapshot.jpg";
+      //     this.webcamService.downloadSnapshot(snapshotUrl, imagePath);
+      //     this.webcamService.processImage(imagePath, this.mjpegStreamUrl)
+      //
+      //
+      //     const imageData = fs.readFileSync('src/storage/processed.jpg');
+      //     this.server.emit('mjpeg-stream', imageData);
+      //   } catch (err) {
+      //     console.error('error');
+      //   }
+      // }, 400)
     )
   }
 

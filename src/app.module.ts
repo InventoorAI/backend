@@ -8,8 +8,8 @@ import { MoversModule } from './movers/movers.module';
 import { MongooseModule } from '@nestjs/mongoose';
 import { ItemsModule } from './items/items.module';
 import { UsersModule } from './users/users.module';
-import { HttpModule } from '@nestjs/axios';
 import { WebcamsModule } from './webcams/webcams.module';
+import { ChatbotService } from './chatbot/chatbot.service';
 
 @Module({
   imports: [
@@ -30,8 +30,10 @@ import { WebcamsModule } from './webcams/webcams.module';
 
     WebcamsModule,
 
+
+
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, ChatbotService, ChatbotService],
 })
 export class AppModule { }

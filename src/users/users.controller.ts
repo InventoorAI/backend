@@ -6,20 +6,38 @@ import { ApiTags } from '@nestjs/swagger';
 import { ChatMessage, User } from './schemas/user.schema';
 import { CreateUserDto } from './dto/create-user.dto';
 import { ClientProxy, Ctx, MessagePattern, MqttContext, MqttRecordBuilder, Payload } from '@nestjs/microservices';
+import { ChatbotService } from 'src/chatbot/chatbot.service';
 
 @ApiTags('users')
 @Controller('users')
 export class UsersController {
   constructor(private readonly usersService: UsersService,
-    @Inject('MQTT_CLIENT') private mqttClient: ClientProxy
+    @Inject('MQTT_CLIENT') private mqttClient: ClientProxy,
+    private readonly chatbotService: ChatbotService,
   ) { }
 
-  @Get('chats')
+  @Get(':id/chats')
   async getChatData(
     @Param('id') id: string
   ): Promise<ChatMessage[]> {
     return await this.usersService.findOne(id).then(user => user.chat);
   }
+
+
+  @Post(':id/chats')
+  async addChatData(
+    @Body() chat: ChatMessage,
+  ): Promise<string> {
+    console.log(chat)
+    return await this.chatbotService.chat([], new Blob());
+  }
+
+  @Get(':id/chats/:chatId')
+  async getChatDataById(
+    @Param('id') id: string) {
+    return await this.usersService.findOne(id).then(user => user.chat)
+  }
+
 
   @Get()
   async findAll(): Promise<User[]> {

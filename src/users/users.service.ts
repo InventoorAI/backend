@@ -35,4 +35,9 @@ export class UsersService {
     return await this.userModel.findOne({ email }).exec();
   }
 
+  async getChatData(): Promise<ChatMessage[]> {
+    return await this.userModel.find().select('chat').exec().then(users => {
+      return users.map(user => user.chat).flat();
+    });
+  }
 }

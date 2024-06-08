@@ -21,7 +21,6 @@ export class ChatMessage {
 })
 
 export class User {
-
   @Factory((faker) => faker.person.fullName())
   @Prop({ required: true })
   name: string;
