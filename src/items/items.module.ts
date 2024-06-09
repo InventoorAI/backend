@@ -1,28 +1,15 @@
 import { Module } from '@nestjs/common';
 import { ItemsService } from './items.service';
-import { ItemsController } from './items.controller';
+import { ItemsGateway } from './items.gateway';
 import { MongooseModule } from '@nestjs/mongoose';
-import { ClientsModule, Transport } from '@nestjs/microservices';
-import { ItemSchema } from './schemas/item.schema';
+import { Item, ItemSchema } from './schemas/item.schema';
+import { ItemsController } from './items.controller';
 
 @Module({
   imports: [
-    MongooseModule.forFeature([{ name: 'Item', schema: ItemSchema }]),
-    ClientsModule.register([
-      {
-        name: 'MQTT_CLIENT',
-        transport: Transport.MQTT,
-
-        options: {
-          url: process.env.MQTT_URL || 'mqtt://mqtt-broker:1883',
-
-        }
-      },
-    ]),
+    MongooseModule.forFeature([{ name: Item.name, schema: ItemSchema }]),
   ],
-  controllers: [
-    ItemsController,
-  ],
-  providers: [ItemsService],
+  providers: [ItemsGateway, ItemsService],
+  controllers: [ItemsController],
 })
 export class ItemsModule { }

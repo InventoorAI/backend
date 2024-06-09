@@ -6,10 +6,12 @@ import { ServeStaticModule } from '@nestjs/serve-static';
 import { ConfigModule } from '@nestjs/config';
 import { MoversModule } from './movers/movers.module';
 import { MongooseModule } from '@nestjs/mongoose';
-import { ItemsModule } from './items/items.module';
+import { ItemsModule } from './items/items.module'
 import { UsersModule } from './users/users.module';
 import { WebcamsModule } from './webcams/webcams.module';
 import { ChatbotService } from './chatbot/chatbot.service';
+import { ChatbotGateway } from './chatbot/chatbot.gateway';
+import { Yolov8Service } from './yolov8/yolov8.service';
 
 @Module({
   imports: [
@@ -18,7 +20,6 @@ import { ChatbotService } from './chatbot/chatbot.service';
     }),
     MongooseModule.forRoot(process.env.MONGODB_URL),
     MoversModule,
-    ItemsModule,
     UsersModule,
     WebcamsModule,
 
@@ -29,11 +30,12 @@ import { ChatbotService } from './chatbot/chatbot.service';
     }),
 
     WebcamsModule,
+    ItemsModule, 
 
 
 
   ],
   controllers: [AppController],
-  providers: [AppService, ChatbotService, ChatbotService],
+  providers: [AppService, ChatbotService, ChatbotService, ChatbotGateway, Yolov8Service],
 })
 export class AppModule { }

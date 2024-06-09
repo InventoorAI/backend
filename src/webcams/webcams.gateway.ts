@@ -1,5 +1,5 @@
 import { HttpService } from '@nestjs/axios';
-import { WebSocketGateway, WebSocketServer, SubscribeMessage, MessageBody, OnGatewayInit, OnGatewayConnection, OnGatewayDisconnect } from '@nestjs/websockets';
+import { WebSocketGateway, WebSocketServer, SubscribeMessage, MessageBody, OnGatewayInit, OnGatewayConnection, OnGatewayDisconnect, ConnectedSocket } from '@nestjs/websockets';
 
 import { Logger } from "@nestjs/common";
 import { Server } from 'socket.io';
@@ -7,13 +7,10 @@ import path from 'path';
 
 import * as fs from 'fs';
 import { WebcamsService } from './webcams.service';
+import { Socket } from 'dgram';
 
 @WebSocketGateway({ cors: true })
-export class WebcamsGateway
-  implements OnGatewayInit, OnGatewayConnection, OnGatewayDisconnect {
-
-  @WebSocketServer()
-  private server: Server;
+export class WebcamsGateway {
 
   private readonly logger = new Logger(WebcamsGateway.name);
   private mjpegStreamUrl = 'http://raspberrypi.local/webcam/stream'; // Default stream URL
@@ -24,40 +21,48 @@ export class WebcamsGateway
   private intervalIds: NodeJS.Timeout[] = [];
   @WebSocketServer() io: Server;
 
-  afterInit() {
-    this.logger.log("Initialized");
+
+  @SubscribeMessage("mjpeg-stream")
+  async handleConnection(
+    @MessageBody('action') action: 'start' | 'stop',
+    @ConnectedSocket() client: Socket,
+  ) {
+
+    if (client) {
+      this.logger.debug(`Client id: ${client} ${action}ed stream`);
+      if (action === 'start') {
+        this.startStream(client, 300);
+      } else {
+        this.stopStream(client);
+      }
+      this.intervalIds.push(
+      )
+    }
   }
 
-  async handleConnection(client: any) {
-    console.log(client.id);
-    const { sockets } = this.io.sockets;
-    this.logger.debug(`Client id: ${client.id} connected`);
-    this.logger.debug(`Number of connected clients: ${sockets.size}`);
-
-    this.intervalIds.push(
-      // setInterval(() => {
-      //   try {
-      //     const snapshotUrl = "http://raspberrypi.local/webcam/snapshot";
-      //     const imagePath = "src/storage/snapshot.jpg";
-      //     this.webcamService.downloadSnapshot(snapshotUrl, imagePath);
-      //     this.webcamService.processImage(imagePath, this.mjpegStreamUrl)
-      //
-      //
-      //     const imageData = fs.readFileSync('src/storage/processed.jpg');
-      //     this.server.emit('mjpeg-stream', imageData);
-      //   } catch (err) {
-      //     console.error('error');
-      //   }
-      // }, 400)
-    )
+  startStream(client: Socket, interval: number) {
+    setInterval(() => {
+      try {
+        const snapshotUrl = "http://raspberrypi.local/webcam/snapshot";
+        const imagePath = "src/storage/snapshot.jpg";
+        this.webcamService.downloadSnapshot(snapshotUrl, imagePath);
+        try {
+          this.webcamService.processImage(imagePath, this.mjpegStreamUrl)
+          const imageData = fs.readFileSync('src/storage/processed.jpg');
+          client.emit('mjpeg-stream', imageData);
+        }
+        catch (e) {
+          const imageData = fs.readFileSync('src/storage/snapshot.jpg');
+          client.emit('mjpeg-stream', imageData);
+        }
+      } catch (err) {
+        console.error('error');
+      }
+    }, interval)
   }
 
-  handleDisconnect(client: any) {
-    this.intervalIds.forEach((id) => {
-      clearInterval(id);
-
-    })
-    this.logger.log(`Cliend id:${client.id} disconnected`);
+  stopStream(client: Socket) {
+    client.disconnect()
   }
 
   setMjpegStreamUrl(url: string) {

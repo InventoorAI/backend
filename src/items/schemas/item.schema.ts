@@ -37,11 +37,13 @@ export class Item {
 
 
   @Factory((faker) => faker.helpers.arrayElement(["Site A", "Site B"]))
-  @Factory({ required: true })
+  @Prop({ required: true })
   site: "Site A" | "Site B";
 
 
-
+  @Factory(faker => faker.number.int())
+  @Prop({ required: true, default: 10 })
+  weight: number;
 
 }
 

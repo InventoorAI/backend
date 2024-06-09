@@ -24,13 +24,13 @@ export class UsersController {
   }
 
 
-  @Post(':id/chats')
-  async addChatData(
-    @Body() chat: ChatMessage,
-  ): Promise<string> {
-    console.log(chat)
-    return await this.chatbotService.chat([], new Blob());
-  }
+  // @Post(':id/chats')
+  // async addChatData(
+  //   @Body() chat: ChatMessage,
+  // ): Promise<string> {
+  //   console.log(chat)
+  //   // return await this.chatbotService.chat([], new Blob());
+  // }
 
   @Get(':id/chats/:chatId')
   async getChatDataById(
