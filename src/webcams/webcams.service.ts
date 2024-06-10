@@ -52,7 +52,7 @@ export class WebcamsService {
     }
 
     formData.append('file', fileBlob);
-    const response = await fetch('http:/192.168.145.49:8000/count', {
+    const response = await fetch('http://192.168.145.49:8000/count', {
       method: 'POST',
       body: formData,
     })
